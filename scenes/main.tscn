@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cg5gac2vwbmbv"]
+
+[ext_resource type="Script" path="res://scripts/camera_look.gd" id="1_ataus"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_opphq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gbxx"]
+albedo_color = Color(0.486275, 0.486275, 0.486275, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3i5q"]
+
+[node name="Node3d" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(6.49896, 0, 0, 0, 0.106822, 0, 0, 0, 6.05433, 0, 0, 0)
+mesh = SubResource("BoxMesh_opphq")
+surface_material_override/0 = SubResource("StandardMaterial3D_2gbxx")
+
+[node name="BenchForward" type="MeshInstance3D" parent="."]
+transform = Transform3D(5.92863, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506563, -2.11546)
+mesh = SubResource("BoxMesh_opphq")
+surface_material_override/0 = SubResource("StandardMaterial3D_t3i5q")
+
+[node name="BenchLeft" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.27898e-07, 0, 1, 0, 1, 0, -2.92596, 0, -4.37114e-08, -2.48341, 0.506563, 0.0344065)
+mesh = SubResource("BoxMesh_opphq")
+surface_material_override/0 = SubResource("StandardMaterial3D_t3i5q")
+
+[node name="BenchRight" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1.27898e-07, 0, 1, 0, 1, 0, -2.92596, 0, -4.37114e-08, 2.48687, 0.506563, 0.0349084)
+mesh = SubResource("BoxMesh_opphq")
+surface_material_override/0 = SubResource("StandardMaterial3D_t3i5q")
+
+[node name="Camera3d" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39207, 0.168468)
+fov = 86.5934
+script = ExtResource("1_ataus")
+
+[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.529505, 0.605501, -0.594132, 3.11425e-08, 0.700374, 0.713776, 0.848307, -0.377948, 0.370851, 0.320072, 3.26933, 4.17578)
+shadow_enabled = true
