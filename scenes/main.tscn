@@ -1,41 +1,91 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg5gac2vwbmbv"]
+[gd_scene load_steps=11 format=2]
 
-[ext_resource type="Script" path="res://scripts/camera_look.gd" id="1_ataus"]
+[ext_resource path="res://materials/white.tres" type="Material" id=1]
+[ext_resource path="res://materials/dark_grey.tres" type="Material" id=2]
+[ext_resource path="res://sprites/crosshair.png" type="Texture" id=3]
+[ext_resource path="res://scripts/GameCamera.gd" type="Script" id=4]
+[ext_resource path="res://scripts/Button.gd" type="Script" id=5]
 
-[sub_resource type="BoxMesh" id="BoxMesh_opphq"]
+[sub_resource type="CubeMesh" id=1]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2gbxx"]
-albedo_color = Color(0.486275, 0.486275, 0.486275, 1)
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t3i5q"]
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[node name="Node3d" type="Node3D"]
+[sub_resource type="ConcavePolygonShape" id=4]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[node name="Floor" type="MeshInstance3D" parent="."]
-transform = Transform3D(6.49896, 0, 0, 0, 0.106822, 0, 0, 0, 6.05433, 0, 0, 0)
-mesh = SubResource("BoxMesh_opphq")
-surface_material_override/0 = SubResource("StandardMaterial3D_2gbxx")
+[sub_resource type="ConcavePolygonShape" id=5]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
 
-[node name="BenchForward" type="MeshInstance3D" parent="."]
-transform = Transform3D(5.92863, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.506563, -2.11546)
-mesh = SubResource("BoxMesh_opphq")
-surface_material_override/0 = SubResource("StandardMaterial3D_t3i5q")
+[node name="Spatial" type="Spatial"]
 
-[node name="BenchLeft" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.27898e-07, 0, 1, 0, 1, 0, -2.92596, 0, -4.37114e-08, -2.48341, 0.506563, 0.0344065)
-mesh = SubResource("BoxMesh_opphq")
-surface_material_override/0 = SubResource("StandardMaterial3D_t3i5q")
+[node name="Camera" type="Camera" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26475, 0.78106 )
+fov = 37.0
+script = ExtResource( 4 )
 
-[node name="BenchRight" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1.27898e-07, 0, 1, 0, 1, 0, -2.92596, 0, -4.37114e-08, 2.48687, 0.506563, 0.0349084)
-mesh = SubResource("BoxMesh_opphq")
-surface_material_override/0 = SubResource("StandardMaterial3D_t3i5q")
+[node name="Sprite3D" type="Sprite3D" parent="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.336522 )
+pixel_size = 0.0001
+texture = ExtResource( 3 )
 
-[node name="Camera3d" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.39207, 0.168468)
-fov = 86.5934
-script = ExtResource("1_ataus")
-
-[node name="DirectionalLight3d" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.529505, 0.605501, -0.594132, 3.11425e-08, 0.700374, 0.713776, 0.848307, -0.377948, 0.370851, 0.320072, 3.26933, 4.17578)
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.825488, 0.535402, -0.178645, -0.097535, 0.447064, 0.889169, 0.555928, -0.716574, 0.421266, 0, 2.58332, 2.3873 )
 shadow_enabled = true
+
+[node name="Floor" type="MeshInstance" parent="."]
+transform = Transform( 2.73401, 0, 0, 0, 0.098231, 0, 0, 0, 2.07637, 0, -0.0277036, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="FrontTable" type="MeshInstance" parent="."]
+transform = Transform( 2.43062, 0, 0, 0, 0.262064, 0, 0, 0, 0.666254, 0, 0.308219, -1.33601 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Button" type="MeshInstance" parent="FrontTable"]
+transform = Transform( 0.0430784, 0, 0, 0, 0.181772, 0, 0, 0, 0.174342, -0.192704, 1.15004, 0 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+script = ExtResource( 5 )
+on_mat = ExtResource( 1 )
+off_mat = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Button"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Button/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="LeftTable" type="MeshInstance" parent="."]
+transform = Transform( 0.732619, 0, 0, 0, 0.262064, 0, 0, 0, 1.32017, -1.68947, 0.308219, 0.709385 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="LeftTable"]
+
+[node name="CollisionShape" type="CollisionShape" parent="LeftTable/StaticBody"]
+shape = SubResource( 4 )
+
+[node name="RightTable" type="MeshInstance" parent="."]
+transform = Transform( 0.732619, 0, 0, 0, 0.262064, 0, 0, 0, 1.32017, 1.70403, 0.308219, 0.709385 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 1 )
+
+[node name="StaticBody" type="StaticBody" parent="RightTable"]
+
+[node name="CollisionShape" type="CollisionShape" parent="RightTable/StaticBody"]
+shape = SubResource( 5 )
