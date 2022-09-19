@@ -13,30 +13,63 @@ func _process(_delta):
 	
 func _input(event):
 	if event is InputEventMouseMotion:
-		rotation.y -= event.relative.x * 0.003
-		rotation.x -= event.relative.y * 0.003
+		handle_mouse_movement(event.relative)
 	elif event is InputEventKey:
-		if event.scancode == KEY_ESCAPE:
-			get_tree().quit()
+		handle_key_press(event.scancode)
 	elif event is InputEventMouseButton:
-		if event.button_index == 1:
-			if event.is_pressed():
-				mouse_clicked = true
-			else:
-				if last_pressed != null and last_pressed.has_method("on_release"):
-					last_pressed.on_release()
-					last_pressed = null
+		handle_mouse(event)
 
 func _physics_process(delta):
 	if mouse_clicked:
 		mouse_clicked = false
-		var pos = get_viewport().get_visible_rect().size / 2
-		var from = project_ray_origin(pos)
-		var to = from + project_ray_normal(pos) * 1000
-		var space_state = get_world().direct_space_state
-		var result = space_state.intersect_ray(from, to)
-		if 'collider' in result:
-			var root_obj = result.collider.get_parent_spatial()
-			if root_obj.has_method("on_press"):
-				root_obj.on_press()
-			last_pressed = root_obj
+		click_object_under_crosshair()
+
+func handle_mouse_movement(delta):
+	rotation.y -= delta.x * 0.003
+	rotation.x -= delta.y * 0.003
+
+func handle_key_press(scancode):
+	if scancode == KEY_ESCAPE:
+		handle_escape()
+
+func handle_escape():
+	get_tree().quit()
+
+func handle_mouse(event):
+	if event.button_index == 1 and event.is_pressed():
+		handle_left_press()
+	elif event.button_index == 1 and not event.is_pressed():
+		handle_left_release()
+
+func handle_left_press():
+	mouse_clicked = true
+
+func handle_left_release():
+	if last_pressed != null and last_pressed.has_method("on_release"):
+		last_pressed.on_release()
+		last_pressed = null
+
+func screen_center():
+	return get_viewport().get_visible_rect().size / 2
+
+func crosshair_ray():
+	var pos = screen_center()
+	var from = project_ray_origin(pos)
+	var to = from + project_ray_normal(pos) * 1000
+	return { 'from': from, 'to': to }
+
+func raycast_from_crosshair():
+	var ray = crosshair_ray()
+	var space_state = get_world().direct_space_state
+	return space_state.intersect_ray(ray.from, ray.to)
+
+func click_collider(collider):
+	var root_obj = collider.get_parent_spatial()
+	if root_obj.has_method("on_press"):
+		root_obj.on_press()
+	last_pressed = root_obj
+
+func click_object_under_crosshair():
+	var result = raycast_from_crosshair()
+	if 'collider' in result:
+		click_collider(result.collider)
