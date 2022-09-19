@@ -57,7 +57,7 @@ material/0 = ExtResource( 1 )
 shape = SubResource( 3 )
 
 [node name="Button" type="MeshInstance" parent="FrontTable"]
-transform = Transform( 0.0430784, 0, 0, 0, 0.181772, 0, 0, 0, 0.174342, -0.192704, 1.15004, 0 )
+transform = Transform( 0.0430784, 0, 0, 0, 0.181772, 0, 0, 0, 0.174342, -0.0183453, 1.15004, 0 )
 mesh = SubResource( 1 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
