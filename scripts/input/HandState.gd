@@ -2,6 +2,7 @@ extends Reference
 
 const HandAnimationSystem = preload('HandAnimationSystem.gd')
 const PickUpAnim = preload('res://scripts/animation/PickUpAnim.gd')
+const PutDownAnim = preload('res://scripts/animation/PutDownAnim.gd')
 
 var held_parent: Spatial
 var holding: Spatial
@@ -50,6 +51,8 @@ func pick_up_object(obj):
 		animations.start(PickUpAnim.new(held_parent), obj)
 
 func put_down_object(crosshair_raycast_result):
+	assert(holding != null)
 	if holding.has_method("on_put_down"):
 		holding.on_put_down()
+	animations.start(PutDownAnim.new(crosshair_raycast_result.position), holding)
 	holding = null
