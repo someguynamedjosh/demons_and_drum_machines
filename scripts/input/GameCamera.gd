@@ -7,9 +7,9 @@ const InputHandler = preload("InputHandler.gd")
 const InteractState = preload("InteractState.gd")
 
 var crosshair: Crosshair = Crosshair.new(self)
-var hover_state: HoverState = HoverState.new()
 var interact_state: InteractState = InteractState.new()
 onready var hand_state: HandState = HandState.new($HeldParent)
+onready var hover_state: HoverState = HoverState.new(hand_state)
 onready var input_handler: InputHandler = InputHandler.new(self, hand_state, interact_state)
 
 # Called when the node enters the scene tree for the first time.

@@ -1,9 +1,17 @@
 extends Reference
 
+const HandState = preload("HandState.gd")
+
+var hand_state: HandState
 var last_hovered = null
 
+func _init(h: HandState):
+	hand_state = h
+
 func physics_process(crosshair_raycast_result: Dictionary):
-	if 'collider' in crosshair_raycast_result:
+	if hand_state.is_holding_anything():
+		start_hovering(null)
+	elif 'collider' in crosshair_raycast_result:
 		hover_collider(crosshair_raycast_result.collider)
 	else:
 		start_hovering(null)
