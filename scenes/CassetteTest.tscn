@@ -72,3 +72,12 @@ shape = SubResource( 6 )
 
 [node name="Cassette" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.682573, 0.570283, -1.15458 )
+
+[node name="Cassette2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05571, 0.570283, -1.15458 )
+
+[node name="Cassette3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35997, 0.570283, -1.15458 )
+
+[node name="Cassette4" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66871, 0.570283, -1.15458 )
