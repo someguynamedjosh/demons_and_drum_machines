@@ -36,32 +36,56 @@ func process(delta: float):
 		var target: Transform = source
 		if animation == ANIM_PICK_UP:
 			target = held_parent.global_transform
+		if animation == ANIM_PUT_DOWN:
+			source = held_parent.global_transform
 		if animation_time >= 1.0:
 			animation_time = 1.0
+			if animation == ANIM_PICK_UP:
+				holding.get_parent_spatial().remove_child(holding)
+				held_parent.add_child(holding)
+				holding.transform = Transform.IDENTITY
+			elif animation == ANIM_PUT_DOWN:
+				holding.transform = target
+				holding = null
 			animation = ANIM_NONE
-			holding.get_parent_spatial().remove_child(holding)
-			held_parent.add_child(holding)
-			holding.transform = Transform.IDENTITY
 		else:
 			holding.transform = source.interpolate_with(target, animation_time)
 
 func physics_process(crosshair_raycast_result: Dictionary):
 	if pick_up_requested:
 		pick_up_requested = false
-		pick_up_raycast_result(crosshair_raycast_result)
+		var obj = object_hit_by_raycast_result(crosshair_raycast_result)
+		pick_up_object(obj)
+	if put_down_requested:
+		put_down_requested = false
+		put_down_object(crosshair_raycast_result)
 
-func pick_up_raycast_result(result):
+func object_hit_by_raycast_result(result):
 	if 'collider' in result:
-		pick_up_collider(result.collider)
+		return object_with_collider(result.collider)
+	else:
+		return null
 
-func pick_up_collider(collider):
-	var root_obj = collider.get_parent_spatial()
-	pick_up_object(root_obj)
+func object_with_collider(collider):
+	return collider.get_parent_spatial()
 
-func pick_up_object(root_obj):
-	if root_obj.has_method("on_pick_up"):
-		root_obj.on_pick_up()
-		holding = root_obj
+func pick_up_object(obj):
+	if obj.has_method("on_pick_up"):
+		obj.on_pick_up()
+		holding = obj
 		object_put_down_transform = holding.transform
 		animation = ANIM_PICK_UP
 		animation_time = 0.0
+
+func put_down_object(crosshair_raycast_result):
+	if holding.has_method("on_put_down"):
+		holding.on_put_down()
+	object_put_down_transform = Transform.IDENTITY \
+		.translated(crosshair_raycast_result.position)
+	var root = holding.get_node("/root/Spatial")
+	print(root)
+	if held_parent.is_a_parent_of(holding):
+		held_parent.remove_child(holding)
+		root.add_child(holding)
+	animation = ANIM_PUT_DOWN
+	animation_time = 0.0
