@@ -2,7 +2,7 @@ extends Reference
 
 var last_hovered = null
 
-func process(crosshair_raycast_result: Dictionary):
+func physics_process(crosshair_raycast_result: Dictionary):
 	if 'collider' in crosshair_raycast_result:
 		hover_collider(crosshair_raycast_result.collider)
 	else:
