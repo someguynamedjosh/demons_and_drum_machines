@@ -5,7 +5,7 @@ const Cassette = preload("Cassette.gd")
 var holding = false
 
 func can_take(object: Spatial) -> bool:
-	return object is Cassette
+	return object is Cassette and not holding
 
 func on_insert(obj):
 	holding = true
