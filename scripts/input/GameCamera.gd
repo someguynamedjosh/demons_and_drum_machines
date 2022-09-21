@@ -5,6 +5,7 @@ const HandState = preload("HandState.gd")
 const HoverState = preload("HoverState.gd")
 const InputHandler = preload("InputHandler.gd")
 const InteractState = preload("InteractState.gd")
+const RaycastResult = preload("RaycastResult.gd")
 
 export var place_cursor: NodePath = "PlaceCursor"
 
@@ -27,9 +28,14 @@ func _process(delta):
 func _input(event: InputEvent):
 	input_handler.input(event)
 
+func get_raycast_result(from: RayCast) -> RaycastResult:
+	from.force_raycast_update()
+	return RaycastResult.new(from.get_collider(), from.get_collision_point())
+
 func _physics_process(_delta):
 	input_handler.physics_update()
-	var raycast_result = crosshair.raycast()
-	hover_state.physics_process(raycast_result)
-	interact_state.physics_process(raycast_result)
-	hand_state.physics_process(raycast_result)
+	var object = get_raycast_result($ObjectRayCast)
+	var container = get_raycast_result($ContainerRayCast)
+	hover_state.physics_process(object)
+	interact_state.physics_process(object)
+	hand_state.physics_process(object, container)
