@@ -5,8 +5,8 @@ const HoldAnim = preload("HoldAnim.gd")
 var start: Transform
 var destination: Transform
 
-func _init(d: Vector3):
-	destination = Transform.IDENTITY.translated(d)
+func _init(d: Transform):
+	destination = d
 
 func duration():
 	return 0.2

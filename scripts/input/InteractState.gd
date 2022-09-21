@@ -1,5 +1,7 @@
 extends Reference
 
+const RaycastResult = preload("RaycastResult.gd")
+
 var last_interacted = null
 var interaction_requested = false
 
@@ -12,14 +14,11 @@ func stop_interacting():
 		last_interacted.on_interact_end()
 		last_interacted = null
 
-func physics_process(crosshair_raycast_result: Dictionary):
+func physics_process(object: RaycastResult):
 	if interaction_requested:
 		interaction_requested = false
-		start_interacting_with_raycast_result(crosshair_raycast_result)
-
-func start_interacting_with_raycast_result(result):
-	if 'collider' in result:
-		start_interacting_with_collider(result.collider)
+		if object.collider != null:
+			start_interacting_with_collider(object.collider)
 
 func start_interacting_with_collider(collider):
 	var root_obj = collider.get_parent_spatial()

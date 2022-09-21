@@ -6,13 +6,25 @@ const InteractState = preload("InteractState.gd")
 var camera: Node
 var hand_state: HandState
 var interact_state: InteractState
+var input_queue = []
 
 func _init(c: Node, h: HandState, i: InteractState):
 	camera = c
 	hand_state = h
 	interact_state = i
 
+func ready():
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+
 func input(event: InputEvent):
+	input_queue.push_back(event)
+
+func physics_update():
+	for event in input_queue:
+		handle_event(event)
+	input_queue.clear()
+
+func handle_event(event: InputEvent):
 	if event is InputEventMouseMotion:
 		handle_mouse_movement(event.relative)
 	elif event is InputEventKey:

@@ -2,6 +2,7 @@ extends Spatial
 
 export var hovered_mat: Material
 export var plain_mat: Material
+var contained_in
 
 func on_hover_start():
 	$Mesh.set_surface_material(0, hovered_mat)
