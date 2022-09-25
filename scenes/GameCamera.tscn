@@ -1,13 +1,21 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/input/GameCamera.gd" type="Script" id=1]
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=2]
+
+[sub_resource type="SpatialMaterial" id=1]
+albedo_color = Color( 0.0705882, 0.803922, 1, 1 )
+emission_enabled = true
+emission = Color( 0.188235, 0, 1, 1 )
+emission_energy = 3.88
+emission_operator = 0
+emission_on_uv2 = false
 
 [node name="GameCamera" type="Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26475, 0.119107 )
 fov = 37.0
 script = ExtResource( 1 )
-place_cursor = NodePath("")
+place_cursor_mat = SubResource( 1 )
 
 [node name="Crosshair" type="Sprite3D" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.336522 )

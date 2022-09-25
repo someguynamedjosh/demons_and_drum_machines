@@ -79,9 +79,4 @@ material/0 = ExtResource( 1 )
 [node name="CollisionShape" type="CollisionShape" parent="RightTable/StaticBody"]
 shape = SubResource( 5 )
 
-[node name="PlaceCursor" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26475, 0.119107 )
-skeleton = NodePath("../GameCamera")
-
 [node name="GameCamera" parent="." instance=ExtResource( 3 )]
-place_cursor = NodePath("../PlaceCursor")
