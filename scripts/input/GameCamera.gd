@@ -7,18 +7,21 @@ const InputHandler = preload("InputHandler.gd")
 const InteractState = preload("InteractState.gd")
 const RaycastResult = preload("RaycastResult.gd")
 
-export var place_cursor: NodePath = "PlaceCursor"
+export var place_cursor_mat: Material
 
+var place_cursor = MeshInstance.new()
 var crosshair: Crosshair = Crosshair.new(self)
 var interact_state: InteractState = InteractState.new()
-onready var hand_state: HandState \
-	= HandState.new($HeldParent, get_node(place_cursor))
+onready var hand_state: HandState = HandState.new($HeldParent, place_cursor)
 onready var hover_state: HoverState = HoverState.new(hand_state)
 onready var input_handler: InputHandler \
 	= InputHandler.new(self, hand_state, interact_state)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	place_cursor.set_name("PlaceCursor")
+	place_cursor.material_override = place_cursor_mat
+	get_tree().root.get_child(0).call_deferred("add_child", place_cursor)
 	input_handler.ready()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
