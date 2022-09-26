@@ -5,6 +5,8 @@ export var plain_mat: Material
 export var audio_source: AudioStreamSample
 var contained_in
 var audio_data: PoolVector2Array
+var beat_duration: int = 1312989 - 1297775
+var beat_offset: int = 1297775 % beat_duration
 
 func _ready():
 	if audio_source != null:
@@ -16,7 +18,11 @@ func _ready():
 			if l1 >= 128:
 				l1 -= 256
 			var left = l1 / 256.0 + d[i] / 65536.0
-			audio_data.append(Vector2(left, left))
+			var r1 = d[i + 3]
+			if r1 >= 128:
+				r1 -= 256
+			var right = r1 / 256.0 + d[i + 2] / 65536.0
+			audio_data.append(Vector2(left, right))
 			i += 4
 
 func on_hover_start():

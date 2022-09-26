@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://scenes/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://materials/dark_grey.tres" type="Material" id=2]
@@ -6,6 +6,8 @@
 [ext_resource path="res://music/533927_NK---Nine-Circles.wav" type="AudioStream" id=4]
 [ext_resource path="res://scripts/Splicer.gd" type="Script" id=5]
 [ext_resource path="res://scenes/Cassette.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scripts/Switch.gd" type="Script" id=7]
+[ext_resource path="res://materials/white.tres" type="Material" id=8]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -57,6 +59,12 @@ shape = SubResource( 2 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.682573, 0.570283, -1.15458 )
 audio_source = ExtResource( 4 )
 
+[node name="Cassette2" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02685, 0.570283, -1.15458 )
+
+[node name="Cassette3" parent="." instance=ExtResource( 6 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.37158, 0.570283, -1.15458 )
+
 [node name="FrontTable" type="Spatial" parent="."]
 
 [node name="Mesh" type="MeshInstance" parent="FrontTable"]
@@ -85,6 +93,20 @@ material/0 = ExtResource( 2 )
 [node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/Mesh2/StaticBody"]
 shape = SubResource( 12 )
 
+[node name="PlaybackSwitch" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.0801242, 0, 0, 0, 0.00987545, 0, 0, 0, 0.0916319, -0.578664, 0.0695667, 0.421176 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 2 )
+script = ExtResource( 7 )
+hovered_mat = ExtResource( 8 )
+default_mat = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/PlaybackSwitch"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/PlaybackSwitch/StaticBody"]
+shape = SubResource( 12 )
+
 [node name="InputSlot" type="Spatial" parent="FrontTable/Splicer"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.575996, 0.233918, 0.332134 )
 script = ExtResource( 3 )
@@ -106,3 +128,4 @@ stream = SubResource( 13 )
 environment = SubResource( 10 )
 
 [connection signal="inserted" from="FrontTable/Splicer/InputSlot" to="FrontTable/Splicer" method="_on_source_insert"]
+[connection signal="removed" from="FrontTable/Splicer/InputSlot" to="FrontTable/Splicer" method="_on_source_removed"]
