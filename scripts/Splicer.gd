@@ -2,6 +2,7 @@ extends Spatial
 
 const Cassette = preload("Cassette.gd")
 
+export var screen_mat: ShaderMaterial
 var source_data: Array = []
 var last_start_beat = 64
 var source: Cassette
@@ -10,11 +11,19 @@ var source: Cassette
 func _ready():
 	pass
 
+func quantization():
+	if $DurationKnob.value >= 16.0:
+		return 1.0
+	else:
+		return 2.0
+
 func start_beat():
-	return round(4.0 * $StartKnob.value) / 4.0
+	var q = quantization()
+	return round(q * $StartKnob.value) / q
 
 func duration():
-	return round(4.0 * $DurationKnob.value) / 4.0
+	var q = quantization()
+	return round(q * $DurationKnob.value) / q
 
 func _process(_delta):
 	if start_beat() < 0.0:
@@ -22,8 +31,10 @@ func _process(_delta):
 	var source_duration = 100.0
 	if start_beat() > source_duration:
 		$StartKnob.value = source_duration
-	if duration() < 0.0:
-		$DurationKnob.value = 0.0
+	if duration() < 0.25:
+		$DurationKnob.value = 0.25
+	screen_mat.set_shader_param("Duration", duration())
+	screen_mat.set_shader_param("Start", start_beat())
 	var end = beat_to_position(last_start_beat + duration())
 	var past_end = $Player.get_playback_position() >= end
 	if past_end and $PlaybackSwitch.active and $Player.playing:

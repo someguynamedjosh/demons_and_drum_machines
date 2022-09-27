@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://scenes/GameCamera.tscn" type="PackedScene" id=1]
 [ext_resource path="res://materials/dark_grey.tres" type="Material" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/Switch.gd" type="Script" id=7]
 [ext_resource path="res://materials/white.tres" type="Material" id=8]
 [ext_resource path="res://scripts/Knob.gd" type="Script" id=9]
+[ext_resource path="res://materials/display.tres" type="Material" id=10]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -20,6 +21,8 @@ data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1
 
 [sub_resource type="ConcavePolygonShape" id=12]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="PlaneMesh" id=14]
 
 [sub_resource type="BoxShape" id=11]
 extents = Vector3( 0.329523, 0.20913, 0.0962989 )
@@ -82,6 +85,7 @@ shape = SubResource( 3 )
 [node name="Splicer" type="Spatial" parent="FrontTable"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.657045, 0.574724, -1.32832 )
 script = ExtResource( 5 )
+screen_mat = ExtResource( 10 )
 
 [node name="Mesh2" type="MeshInstance" parent="FrontTable/Splicer"]
 transform = Transform( 0.800235, 0, 0, 0, 0.192503, 0, 0, 0, 0.340323, -0.0157464, 0.188088, -0.00769424 )
@@ -93,6 +97,12 @@ material/0 = ExtResource( 2 )
 
 [node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/Mesh2/StaticBody"]
 shape = SubResource( 12 )
+
+[node name="Display" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.250219, -9.08877e-09, 4.1489e-16, 0, -2.63109e-09, -0.0628599, 3.7782e-08, 0.0601922, -2.74769e-09, -0.0157464, 0.286271, 0.355742 )
+mesh = SubResource( 14 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 10 )
 
 [node name="PlaybackSwitch" type="MeshInstance" parent="FrontTable/Splicer"]
 transform = Transform( 0.0801242, 0, 0, 0, 0.00987545, 0, 0, 0, 0.0916319, -0.578664, 0.0695667, 0.421176 )
