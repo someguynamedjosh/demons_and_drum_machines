@@ -5,8 +5,10 @@ export var default_mat: Material
 export var value = 0.0
 
 func on_interact_move(delta):
-	value += delta.x
-	value += delta.y
+	var speed = 2.0
+	value += delta.x * speed
+	value -= delta.y * speed
+	rotation.z = -value
 	print(value)
 
 func on_interact_start():
