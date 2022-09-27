@@ -19,6 +19,3 @@ func on_insert(obj):
 func on_remove(obj):
 	holding = null
 	emit_signal('removed', obj)
-
-func _process(delta):
-	pass
