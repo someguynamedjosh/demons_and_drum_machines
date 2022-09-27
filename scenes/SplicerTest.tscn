@@ -123,6 +123,9 @@ shape = SubResource( 11 )
 
 [node name="Player" type="AudioStreamPlayer3D" parent="FrontTable/Splicer"]
 stream = SubResource( 13 )
+unit_size = 100.0
+emission_angle_degrees = 90.0
+attenuation_filter_db = 0.0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 10 )
