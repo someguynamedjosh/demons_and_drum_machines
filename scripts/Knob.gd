@@ -8,8 +8,9 @@ func on_interact_move(delta):
 	var speed = 2.0
 	value += delta.x * speed
 	value -= delta.y * speed
+
+func _process(_delta):
 	rotation.z = -value
-	print(value)
 
 func on_interact_start():
 	return true

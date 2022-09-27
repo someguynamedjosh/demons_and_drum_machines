@@ -12,10 +12,10 @@ func _ready():
 	pass
 
 func quantization():
-	if $DurationKnob.value >= 16.0:
-		return 1.0
-	else:
+	if $DurationKnob.value >= 8.125:
 		return 2.0
+	else:
+		return 4.0
 
 func start_beat():
 	var q = quantization()
@@ -33,6 +33,8 @@ func _process(_delta):
 		$StartKnob.value = source_duration
 	if duration() < 0.25:
 		$DurationKnob.value = 0.25
+	if duration() > 16.0:
+		$DurationKnob.value = 16.0
 	screen_mat.set_shader_param("Duration", duration())
 	screen_mat.set_shader_param("Start", start_beat())
 	var end = beat_to_position(last_start_beat + duration())
