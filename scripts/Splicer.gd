@@ -21,9 +21,11 @@ func _process(delta):
 	if should_play:
 		var empty_frames = playback.get_frames_available()
 		while empty_frames > 0:
-			playback.push_frame(source.audio_data[playback_index])
-			playback_index += 1
+			playback.push_frame(source.audio.get_sample(playback_index))
+		#	playback_index += 1
 			empty_frames -= 1
+			if empty_frames % 20 == 0:
+				print(empty_frames)
 	if should_play and not $Player.playing:
 		$Player.play()
 	if not should_play and $Player.playing:

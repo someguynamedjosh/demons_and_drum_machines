@@ -57,7 +57,7 @@ shape = SubResource( 2 )
 
 [node name="Cassette" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.682573, 0.570283, -1.15458 )
-audio_source = ExtResource( 4 )
+initial_content = ExtResource( 4 )
 
 [node name="Cassette2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02685, 0.570283, -1.15458 )
