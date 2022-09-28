@@ -28,7 +28,9 @@ func duration():
 func _process(_delta):
 	if start_beat() < 0.0:
 		$StartKnob.value = 0.0
-	var source_duration = 100.0
+	var source_duration = 0.0
+	if source != null:
+		source_duration = source.audio.duration()
 	if start_beat() > source_duration:
 		$StartKnob.value = source_duration
 	if duration() < 0.25:
@@ -53,7 +55,7 @@ func beat_to_position(beat: float):
 	if source == null:
 		return 0
 	else:
-		return beat * source.beat_duration + source.beat_offset
+		return beat * source.audio.beat_time() + source.audio.start_time()
 
 func _on_source_insert(new_source: Cassette):
 	source = new_source

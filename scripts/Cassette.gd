@@ -1,19 +1,22 @@
 extends Spatial
 
-const AudioContainer = preload("res://native/AudioContainer.gdns")
+const Dummy = preload("res://native/Dummy.gdns")
+const MusicBuffer = preload("res://native/MusicBuffer.gdns")
 
 export var hovered_mat: Material
 export var plain_mat: Material
 var contained_in
-export var initial_content: AudioStreamSample
-var beat_duration: float = (1312981 - 1297775) / 44100.0 * 2.0
-var beat_offset: float = fmod(1297710 / 44100.0 - 0.5 * beat_duration, beat_duration)
-var audio: AudioContainer
+export var initial_content: Resource
+var audio: MusicBuffer
+var dummy: Dummy
 
 func _ready():
-	audio = AudioContainer.new()
+	#audio = MusicBuffer.new()
 	if initial_content != null:
-		audio.load_sample_data(initial_content)
+		#audio.load_sample_data(initial_content)
+		#audio = audio.trim(16.0, 32.0)
+		dummy = Dummy.new()
+		dummy = dummy.make()
 
 func on_hover_start():
 	$Mesh.set_surface_material(0, hovered_mat)
