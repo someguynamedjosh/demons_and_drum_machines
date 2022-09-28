@@ -48,6 +48,9 @@ func _process(_delta):
 		source.audio.play_audio($Player)
 		last_start_beat = start_beat()
 		$Player.play(beat_to_position(last_start_beat))
+	if $Player.get_playback_position() <= beat_to_position(last_start_beat):
+		print('Seeking!')
+		$Player.seek(beat_to_position(last_start_beat))
 	if not should_play and $Player.playing:
 		$Player.stop()
 
