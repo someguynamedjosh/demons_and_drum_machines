@@ -9,13 +9,13 @@ signal deactivated()
 func activate():
 	if not active:
 		active = true
-		translation.y -= 0.05
+		translation.y -= 0.01
 		emit_signal("activated")
 	
 func deactivate():
 	if active:
 		active = false
-		translation.y += 0.05
+		translation.y += 0.01
 		emit_signal("deactivated")
 
 func on_interact_start():

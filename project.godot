@@ -24,6 +24,11 @@ config/name="demons_and_drum_machines"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=1280
+window/size/height=720
+
 [editor]
 
 version_control_autoload_on_startup=true

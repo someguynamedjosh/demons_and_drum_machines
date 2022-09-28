@@ -38,8 +38,9 @@ func handle_mouse_movement(delta: Vector2):
 		and interact_state.last_interacted.has_method("on_interact_move"):
 		interact_state.last_interacted.on_interact_move(delta)
 	if not interact_state.locked:
-		camera.rotation.y -= delta.x
-		camera.rotation.x -= delta.y
+		var camera_speed = 0.4
+		camera.rotation.y -= delta.x * camera_speed
+		camera.rotation.x -= delta.y * camera_speed
 
 func handle_key_press(scancode):
 	if scancode == KEY_ESCAPE:

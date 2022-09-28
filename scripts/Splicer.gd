@@ -15,6 +15,7 @@ func _process(_delta):
 		play()
 	if not should_play and $Player.playing:
 		stop()
+	animate_cassettes()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -43,6 +44,13 @@ func source_duration() -> float:
 		return source().audio.duration()
 	else:
 		return 0.0
+
+func animate_cassettes():
+	var spin = $PlaybackSwitch.active
+	if $InputSlot.holding != null:
+		$InputSlot.holding.spin = spin
+	if $OutputSlot.holding != null:
+		$OutputSlot.holding.spin = spin
 
 func update_knob_limits():
 	$StartKnob.set_range(0.0, source_beats() - 0.25)

@@ -5,6 +5,7 @@ const PickUpAnim = preload('res://scripts/animation/PickUpAnim.gd')
 const PutDownAnim = preload('res://scripts/animation/PutDownAnim.gd')
 const RaycastResult = preload("RaycastResult.gd")
 
+var camera: Spatial
 var held_parent: Spatial
 var place_cursor: MeshInstance
 var holding: Spatial
@@ -14,6 +15,7 @@ var animations = HandAnimationSystem.new()
 
 func _init(h: Spatial, c: MeshInstance):
 	assert(h != null)
+	camera = h.get_parent_spatial()
 	held_parent = h
 	place_cursor = c
 
@@ -80,7 +82,8 @@ func object_place_transform(object_ray: RaycastResult, container):
 	if container != null:
 		return container.get_node("InsertionPoint").global_transform
 	elif object_ray.collider != null:
-		return Transform.IDENTITY.translated(object_ray.position)
+		return Transform.IDENTITY.translated(object_ray.position) \
+			* Transform.IDENTITY.rotated(Vector3.UP, camera.rotation.y)
 	else:
 		return null
 

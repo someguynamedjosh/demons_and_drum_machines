@@ -1,0 +1,331 @@
+[gd_scene load_steps=21 format=2]
+
+[ext_resource path="res://scenes/GameCamera.tscn" type="PackedScene" id=1]
+[ext_resource path="res://materials/dark_grey.tres" type="Material" id=2]
+[ext_resource path="res://scripts/CassetteSlot.gd" type="Script" id=3]
+[ext_resource path="res://scenes/Cassette.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scripts/Splicer.gd" type="Script" id=5]
+[ext_resource path="res://music/NineCircles.tres" type="Resource" id=6]
+[ext_resource path="res://scripts/Switch.gd" type="Script" id=7]
+[ext_resource path="res://materials/white.tres" type="Material" id=8]
+[ext_resource path="res://scripts/Knob.gd" type="Script" id=9]
+[ext_resource path="res://materials/display.tres" type="Material" id=10]
+
+[sub_resource type="CubeMesh" id=1]
+
+[sub_resource type="ConcavePolygonShape" id=2]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="ConcavePolygonShape" id=3]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="BoxShape" id=15]
+extents = Vector3( 0.00826457, 0.0318557, 0.0502249 )
+
+[sub_resource type="ConcavePolygonShape" id=12]
+data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
+
+[sub_resource type="PlaneMesh" id=14]
+
+[sub_resource type="BoxShape" id=11]
+extents = Vector3( 0.0628998, 0.0490438, 0.0400708 )
+
+[sub_resource type="AudioStreamGenerator" id=13]
+buffer_length = 0.11
+
+[sub_resource type="ProceduralSky" id=9]
+
+[sub_resource type="Environment" id=10]
+background_mode = 2
+background_sky = SubResource( 9 )
+background_sky_orientation = Basis( -0.939693, 0, 0.34202, 0, 1, 0, -0.34202, 0, -0.939693 )
+tonemap_mode = 2
+ssao_enabled = true
+glow_enabled = true
+glow_bicubic_upscale = true
+glow_high_quality = true
+
+[node name="Spatial" type="Spatial"]
+
+[node name="GameCamera" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.82658, 0.334612 )
+
+[node name="DirectionalLight" type="DirectionalLight" parent="."]
+transform = Transform( 0.825488, 0.535402, -0.178645, -0.097535, 0.447064, 0.889169, 0.555928, -0.716574, 0.421266, 0, 2.58332, 2.3873 )
+light_energy = 0.5
+shadow_enabled = true
+
+[node name="Floor" type="MeshInstance" parent="."]
+transform = Transform( 2.73401, 0, 0, 0, 0.098231, 0, 0, 0, 2.07637, 0, 0, 0 )
+mesh = SubResource( 1 )
+material/0 = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="Floor"]
+
+[node name="CollisionShape" type="CollisionShape" parent="Floor/StaticBody"]
+shape = SubResource( 2 )
+
+[node name="FrontTable" type="Spatial" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195053, -1.27065 )
+
+[node name="Mesh" type="MeshInstance" parent="FrontTable"]
+transform = Transform( 1.56554, 0, 0, 0, 0.27594, 0, 0, 0, 0.375799, 0, 0.345288, 0.0223333 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../..")
+material/0 = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Mesh"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Mesh/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Rack" type="Spatial" parent="FrontTable"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.57678, 0.543253, 0 )
+
+[node name="Mesh2" type="MeshInstance" parent="FrontTable/Rack"]
+transform = Transform( 0.429535, 0, 0, 0, 0.0058169, 0, 0, 0, 0.079938, 0, 0.0855265, 0.0223333 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Mesh2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Mesh2/StaticBody"]
+shape = SubResource( 3 )
+
+[node name="Slot2" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0294843, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot2"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot2"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot2/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot3" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00261867, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot3"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot3"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot3/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot4" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0355361, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot4"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot4"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot4/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot5" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0690368, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot5"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot5"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot5/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot6" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.105834, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot6"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot6"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot6/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot7" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.137937, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot7"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot7"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot7/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot8" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.170854, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot8"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot8"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot8/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Slot9" type="Spatial" parent="FrontTable/Rack"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.204355, 0.097702, 0.0273143 )
+script = ExtResource( 3 )
+start_with = ExtResource( 4 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot9"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot9"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Rack/Slot9/StaticBody"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
+shape = SubResource( 15 )
+
+[node name="Splicer" type="Spatial" parent="FrontTable"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.657045, 0.623361, -0.0784855 )
+script = ExtResource( 5 )
+screen_mat = ExtResource( 10 )
+
+[node name="Mesh2" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.384139, 0, 0, 0, 0.057577, 0, 0, 0, 0.211453, -0.092974, 0.0545265, 0.1103 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/Mesh2"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/Mesh2/StaticBody"]
+shape = SubResource( 12 )
+
+[node name="Display" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.153198, -5.56464e-09, 2.54018e-16, 0, -1.6109e-09, -0.0384862, 2.31322e-08, 0.0368529, -1.68228e-09, -0.0966402, 0.0583789, 0.322318 )
+mesh = SubResource( 14 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 10 )
+
+[node name="PlaybackSwitch" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.0215623, 0, 0, 0, 0.00265759, 0, 0, 0, 0.0246592, -0.391033, 0.0198971, 0.344941 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 2 )
+script = ExtResource( 7 )
+hovered_mat = ExtResource( 8 )
+default_mat = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/PlaybackSwitch"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/PlaybackSwitch/StaticBody"]
+shape = SubResource( 12 )
+
+[node name="StartKnob" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.0274565, 0, 0, 0, 0.0257738, 0, 0, 0, 0.0248637, -0.297985, 0.0588135, 0.332567 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 2 )
+script = ExtResource( 9 )
+hovered_mat = ExtResource( 8 )
+default_mat = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/StartKnob"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/StartKnob/StaticBody"]
+shape = SubResource( 12 )
+
+[node name="DurationKnob" type="MeshInstance" parent="FrontTable/Splicer"]
+transform = Transform( 0.027, 0, 0, 0, 0.026, 0, 0, 0, 0.025, 0.108547, 0.0616567, 0.32203 )
+mesh = SubResource( 1 )
+skeleton = NodePath("../../..")
+material/0 = ExtResource( 2 )
+script = ExtResource( 9 )
+hovered_mat = ExtResource( 8 )
+default_mat = ExtResource( 2 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/DurationKnob"]
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/DurationKnob/StaticBody"]
+shape = SubResource( 12 )
+
+[node name="InputSlot" type="Spatial" parent="FrontTable/Splicer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.395228, 0.0709345, 0.320619 )
+script = ExtResource( 3 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Splicer/InputSlot"]
+transform = Transform( 1, 4.37114e-08, -1.91069e-15, 0, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/InputSlot"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/InputSlot/StaticBody"]
+shape = SubResource( 11 )
+
+[node name="OutputSlot" type="Spatial" parent="FrontTable/Splicer"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.20531, 0.0713792, 0.332134 )
+script = ExtResource( 3 )
+
+[node name="InsertionPoint" type="Spatial" parent="FrontTable/Splicer/OutputSlot"]
+transform = Transform( 1, 4.37114e-08, -1.91069e-15, 0, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 0, 0, 0 )
+
+[node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/OutputSlot"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape" type="CollisionShape" parent="FrontTable/Splicer/OutputSlot/StaticBody"]
+shape = SubResource( 11 )
+
+[node name="Player" type="AudioStreamPlayer3D" parent="FrontTable/Splicer"]
+stream = SubResource( 13 )
+unit_db = -5.0
+unit_size = 100.0
+max_db = 0.0
+emission_angle_degrees = 90.0
+attenuation_filter_db = 0.0
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 10 )
+
+[node name="Cassette" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115587, 0.64187, -0.980066 )
+audio = ExtResource( 6 )
+
+[connection signal="inserted" from="FrontTable/Splicer/InputSlot" to="FrontTable/Splicer" method="_on_source_insert"]
