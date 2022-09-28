@@ -80,4 +80,3 @@ material/0 = ExtResource( 1 )
 shape = SubResource( 5 )
 
 [node name="GameCamera" parent="." instance=ExtResource( 3 )]
-
