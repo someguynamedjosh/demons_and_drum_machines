@@ -55,6 +55,9 @@ func update_screen():
 	screen_mat.set_shader_param("Duration", snap($DurationKnob.get_display_value()))
 
 func stop():
+	var end = position_to_beat($Player.get_playback_position())
+	if $InputSlot.holding != null and $OutputSlot.holding != null:
+		$OutputSlot.holding.audio = $InputSlot.holding.audio.trim(last_start_beat, end)
 	$Player.stop()
 	$Player.seek(0.0)
 	$PlaybackSwitch.deactivate()
@@ -75,6 +78,12 @@ func beat_to_position(beat: float):
 		return 0
 	else:
 		return beat * source().audio.beat_time() + source().audio.start_time()
+
+func position_to_beat(position: float):
+	if source() == null:
+		return 0
+	else:
+		return (position - source().audio.start_time()) / source().audio.beat_time()
 
 func _on_source_insert(_new_source):
 	$StartKnob.set_animated(0.0)

@@ -7,11 +7,6 @@ export var plain_mat: Material
 var contained_in
 export var audio: Resource#: MusicBuffer#, actual annotation gives a segfault and cannot be exported.
 
-func _ready():
-	if audio != null:
-		audio = audio.trim(32.0, 48.0)
-		print(audio.duration())
-
 func on_hover_start():
 	$Mesh.set_surface_material(0, hovered_mat)
 	
