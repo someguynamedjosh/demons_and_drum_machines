@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/CassetteSlot.gd" type="Script" id=3]
 [ext_resource path="res://scenes/Cassette.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scripts/Splicer.gd" type="Script" id=5]
-[ext_resource path="res://music/NineCircles.tres" type="Resource" id=6]
+[ext_resource path="res://music/Envision.tres" type="Resource" id=6]
 [ext_resource path="res://scripts/Switch.gd" type="Script" id=7]
 [ext_resource path="res://materials/white.tres" type="Material" id=8]
 [ext_resource path="res://scripts/Knob.gd" type="Script" id=9]
@@ -66,10 +66,10 @@ material/0 = ExtResource( 2 )
 shape = SubResource( 2 )
 
 [node name="FrontTable" type="Spatial" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0195053, -1.27065 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.426793, -1.27065 )
 
 [node name="Mesh" type="MeshInstance" parent="FrontTable"]
-transform = Transform( 1.56554, 0, 0, 0, 0.27594, 0, 0, 0, 0.375799, 0, 0.345288, 0.0223333 )
+transform = Transform( 1.56554, 0, 0, 0, 0.476632, 0, 0, 0, 0.375799, 0, 0.143608, 0.0223333 )
 mesh = SubResource( 1 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
@@ -325,7 +325,7 @@ attenuation_filter_db = 0.0
 environment = SubResource( 10 )
 
 [node name="Cassette" parent="." instance=ExtResource( 4 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115587, 0.64187, -0.980066 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115587, 1.04813, -0.980066 )
 audio = ExtResource( 6 )
 
 [connection signal="inserted" from="FrontTable/Splicer/InputSlot" to="FrontTable/Splicer" method="_on_source_insert"]

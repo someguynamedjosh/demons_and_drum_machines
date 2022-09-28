@@ -64,6 +64,10 @@ func update_screen():
 
 func stop():
 	var end = position_to_beat($Player.get_playback_position())
+	var exact_end = last_start_beat + $DurationKnob.get_target_value()
+	if abs(beat_to_position(end) - beat_to_position(exact_end)) <= 0.1:
+		print(last_start_beat, ' Full!')
+		end = exact_end
 	if $InputSlot.holding != null and $OutputSlot.holding != null:
 		$OutputSlot.holding.audio = $InputSlot.holding.audio.trim(last_start_beat, end)
 	$Player.stop()
@@ -72,7 +76,12 @@ func stop():
 
 func stop_if_past_end():
 	var end = beat_to_position(last_start_beat + $DurationKnob.get_target_value())
-	var past_end = $Player.get_playback_position() >= min(end, source_duration() - 0.01)
+	# Stop it slightly early so we don't overshoot and play part of the next
+	# beat, which will not show up in the recording.
+	var buffer = 0.1
+	if $DurationKnob.get_target_value() < 1.0:
+		buffer = 0.05
+	var past_end = $Player.get_playback_position() >= min(end, source_duration()) - buffer
 	if past_end and $PlaybackSwitch.active:
 		stop()
 
