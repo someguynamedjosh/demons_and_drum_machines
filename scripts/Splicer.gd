@@ -5,67 +5,76 @@ const Cassette = preload("Cassette.gd")
 export var screen_mat: ShaderMaterial
 var source_data: Array = []
 var last_start_beat = 64
-var source: Cassette
+
+func _process(_delta):
+	update_knob_limits()
+	update_screen()
+	stop_if_past_end()
+	var should_play = $PlaybackSwitch.active and source() != null
+	if should_play and not $Player.playing:
+		play()
+	if not should_play and $Player.playing:
+		stop()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
-func quantization():
-	if $DurationKnob.value >= 8.125:
-		return 2.0
+func snapping():
+	if $DurationKnob.get_target_value() >= 8.125:
+		return 0.5
 	else:
-		return 4.0
+		return 0.25
 
-func start_beat():
-	var q = quantization()
-	return round(q * $StartKnob.value) / q
+func snap(value):
+	return round(value / snapping()) * snapping()
 
-func duration():
-	var q = quantization()
-	return round(q * $DurationKnob.value) / q
+func source() -> Cassette:
+	return $InputSlot.holding
 
-func _process(_delta):
-	if start_beat() < 0.0:
-		$StartKnob.value = 0.0
-	var source_beats = 0.0
-	if source != null:
-		source_beats = source.audio.beats()
-	var source_duration = 0.0
-	if source != null:
-		source_duration = source.audio.duration()
-	if start_beat() > source_beats:
-		$StartKnob.value = source_beats
-	if duration() > source_beats - start_beat():
-		$DurationKnob.value = source_beats - start_beat()
-	if duration() < 0.25:
-		$DurationKnob.value = 0.25
-	if duration() > 16.0:
-		$DurationKnob.value = 16.0
-	screen_mat.set_shader_param("Duration", duration())
-	screen_mat.set_shader_param("Start", start_beat())
-	var end = beat_to_position(last_start_beat + duration())
-	var past_end = $Player.get_playback_position() >= min(end, source_duration - 0.01)
+func source_beats() -> float:
+	if source() != null:
+		return source().audio.beats()
+	else:
+		return 16.0
+
+func source_duration() -> float:
+	if source() != null:
+		return source().audio.duration()
+	else:
+		return 0.0
+
+func update_knob_limits():
+	$StartKnob.set_range(0.0, source_beats() - 0.25)
+	$StartKnob.set_snapping(snapping())
+	$DurationKnob.set_range(0.25, min(source_beats() - $StartKnob.get_display_value(), 16.0))
+	$DurationKnob.set_snapping(snapping())
+
+func update_screen():
+	screen_mat.set_shader_param("Start", snap($StartKnob.get_display_value()))
+	screen_mat.set_shader_param("Duration", snap($DurationKnob.get_display_value()))
+
+func stop():
+	$Player.stop()
+	$Player.seek(0.0)
+	$PlaybackSwitch.deactivate()
+
+func stop_if_past_end():
+	var end = beat_to_position(last_start_beat + $DurationKnob.get_target_value())
+	var past_end = $Player.get_playback_position() >= min(end, source_duration() - 0.01)
 	if past_end and $PlaybackSwitch.active:
-		$PlaybackSwitch.on_interact_start()
-		$Player.seek(0.0)
-	var should_play = $PlaybackSwitch.active and source != null
-	if should_play and not $Player.playing:
-		source.audio.play_audio($Player)
-		last_start_beat = start_beat()
-		$Player.play(beat_to_position(last_start_beat))
-	if not should_play and $Player.playing:
-		$Player.stop()
-		$Player.seek(0.0)
+		stop()
+
+func play():
+	source().audio.play_audio($Player)
+	last_start_beat = $StartKnob.get_target_value()
+	$Player.play(beat_to_position(last_start_beat))
 
 func beat_to_position(beat: float):
-	if source == null:
+	if source() == null:
 		return 0
 	else:
-		return beat * source.audio.beat_time() + source.audio.start_time()
+		return beat * source().audio.beat_time() + source().audio.start_time()
 
-func _on_source_insert(new_source: Cassette):
-	source = new_source
-
-func _on_source_removed(_old_source: Cassette):
-	source = null
+func _on_source_insert(_new_source):
+	$StartKnob.set_animated(0.0)

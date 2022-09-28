@@ -10,7 +10,7 @@ func process(delta):
 		var next = anim.process(delta)
 		if anim.is_finished():
 			if next == null:
-				active_animations.erase(anim_target)
+				var _unused = active_animations.erase(anim_target)
 			else:
 				start(next, anim_target)
 

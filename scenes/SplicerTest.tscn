@@ -126,7 +126,6 @@ material/0 = ExtResource( 2 )
 script = ExtResource( 9 )
 hovered_mat = ExtResource( 8 )
 default_mat = ExtResource( 2 )
-value = 16.0
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/StartKnob"]
 
@@ -141,7 +140,6 @@ material/0 = ExtResource( 2 )
 script = ExtResource( 9 )
 hovered_mat = ExtResource( 8 )
 default_mat = ExtResource( 2 )
-value = 4.0
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Splicer/DurationKnob"]
 
@@ -174,4 +172,3 @@ attenuation_filter_db = 0.0
 environment = SubResource( 10 )
 
 [connection signal="inserted" from="FrontTable/Splicer/InputSlot" to="FrontTable/Splicer" method="_on_source_insert"]
-[connection signal="removed" from="FrontTable/Splicer/InputSlot" to="FrontTable/Splicer" method="_on_source_removed"]

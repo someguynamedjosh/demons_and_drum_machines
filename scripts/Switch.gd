@@ -6,14 +6,23 @@ var active = false
 signal activated()
 signal deactivated()
 
-func on_interact_start():
-	active = !active
-	if active:
+func activate():
+	if not active:
+		active = true
 		translation.y -= 0.05
 		emit_signal("activated")
-	else:
+	
+func deactivate():
+	if active:
+		active = false
 		translation.y += 0.05
 		emit_signal("deactivated")
+
+func on_interact_start():
+	if active:
+		deactivate()
+	else:
+		activate()
 	
 func on_hover_start():
 	set_surface_material(0, hovered_mat)
