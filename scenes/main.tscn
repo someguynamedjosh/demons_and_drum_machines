@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/GameCamera.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scripts/Button.gd" type="Script" id=5]
 
-[sub_resource type="CubeMesh" id=7]
+[sub_resource type="CubeMesh" id=1]
 
 [sub_resource type="ConcavePolygonShape" id=2]
 data = PoolVector3Array( -1, 1, 1, 1, 1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, -1, 1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, -1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, -1, 1, -1, -1, 1, -1, 1, -1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, 1, 1, 1, -1, -1, 1, 1, -1, 1, -1, 1, 1, -1, -1, -1, 1, 1, -1, 1, -1, -1, -1, 1, -1, 1, 1, -1, -1, -1, -1, -1 )
@@ -27,7 +27,7 @@ shadow_enabled = true
 
 [node name="Floor" type="MeshInstance" parent="."]
 transform = Transform( 2.73401, 0, 0, 0, 0.098231, 0, 0, 0, 2.07637, 0, -0.0277036, 0 )
-mesh = SubResource( 7 )
+mesh = SubResource( 1 )
 material/0 = ExtResource( 2 )
 
 [node name="StaticBody" type="StaticBody" parent="Floor"]
@@ -37,7 +37,7 @@ shape = SubResource( 2 )
 
 [node name="FrontTable" type="MeshInstance" parent="."]
 transform = Transform( 2.43062, 0, 0, 0, 0.262064, 0, 0, 0, 0.666254, 0, 0.308219, -1.33601 )
-mesh = SubResource( 7 )
+mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable"]
@@ -47,7 +47,7 @@ shape = SubResource( 3 )
 
 [node name="Button" type="MeshInstance" parent="FrontTable"]
 transform = Transform( 0.0430784, 0, 0, 0, 0.181772, 0, 0, 0, 0.174342, -0.0183453, 1.15004, 0 )
-mesh = SubResource( 7 )
+mesh = SubResource( 1 )
 skeleton = NodePath("../..")
 material/0 = ExtResource( 2 )
 script = ExtResource( 5 )
@@ -61,7 +61,7 @@ shape = SubResource( 3 )
 
 [node name="LeftTable" type="MeshInstance" parent="."]
 transform = Transform( 0.732619, 0, 0, 0, 0.262064, 0, 0, 0, 1.32017, -1.68947, 0.308219, 0.709385 )
-mesh = SubResource( 7 )
+mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="LeftTable"]
@@ -71,7 +71,7 @@ shape = SubResource( 4 )
 
 [node name="RightTable" type="MeshInstance" parent="."]
 transform = Transform( 0.732619, 0, 0, 0, 0.262064, 0, 0, 0, 1.32017, 1.70403, 0.308219, 0.709385 )
-mesh = SubResource( 7 )
+mesh = SubResource( 1 )
 material/0 = ExtResource( 1 )
 
 [node name="StaticBody" type="StaticBody" parent="RightTable"]
@@ -80,3 +80,4 @@ material/0 = ExtResource( 1 )
 shape = SubResource( 5 )
 
 [node name="GameCamera" parent="." instance=ExtResource( 3 )]
+

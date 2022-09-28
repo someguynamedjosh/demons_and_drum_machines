@@ -97,17 +97,11 @@ func put_down_object(target_transform, container):
 	assert(holding != null)
 	if target_transform == null:
 		return
-	assert(holding != null)
 	if holding.has_method("on_put_down"):
 		holding.on_put_down()
-	assert(holding != null)
 	if container != null:
-		assert(holding != null)
 		holding.contained_in = container
-		assert(holding != null)
 		if container.has_method("on_insert"):
-			assert(holding != null)
 			container.on_insert(holding)
-	assert(holding != null)
 	animations.start(PutDownAnim.new(target_transform), holding)
 	holding = null
