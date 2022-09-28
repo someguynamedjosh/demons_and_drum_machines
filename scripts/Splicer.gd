@@ -37,7 +37,7 @@ func source_beats() -> float:
 	if source() != null:
 		return source().audio.beats()
 	else:
-		return 16.0
+		return 9e9
 
 func source_duration() -> float:
 	if source() != null:

@@ -1,21 +1,21 @@
 extends Camera
 
-const Crosshair = preload("Crosshair.gd")
 const HandState = preload("HandState.gd")
 const HoverState = preload("HoverState.gd")
 const InputHandler = preload("InputHandler.gd")
 const InteractState = preload("InteractState.gd")
 const RaycastResult = preload("RaycastResult.gd")
+const ZoomState = preload("ZoomState.gd")
 
 export var place_cursor_mat: Material
 
 var place_cursor = MeshInstance.new()
-var crosshair: Crosshair = Crosshair.new(self)
 var interact_state: InteractState = InteractState.new()
+onready var zoom_state: ZoomState = ZoomState.new(self, $Crosshair, $HeldParent)
 onready var hand_state: HandState = HandState.new($HeldParent, place_cursor)
 onready var hover_state: HoverState = HoverState.new(hand_state)
 onready var input_handler: InputHandler \
-	= InputHandler.new(self, hand_state, interact_state)
+	= InputHandler.new(self, hand_state, interact_state, zoom_state)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

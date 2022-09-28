@@ -239,7 +239,7 @@ void light() {
 
 }
 "
-graph_offset = Vector2( -1635.13, -139.621 )
+graph_offset = Vector2( -623.107, -158.634 )
 modes/cull = 1
 nodes/fragment/0/position = Vector2( 1300, 300 )
 nodes/fragment/2/node = SubResource( 1 )
@@ -247,7 +247,7 @@ nodes/fragment/2/position = Vector2( -520, -200 )
 nodes/fragment/3/node = SubResource( 3 )
 nodes/fragment/3/position = Vector2( -1280, 220 )
 nodes/fragment/4/node = SubResource( 6 )
-nodes/fragment/4/position = Vector2( -520, 460 )
+nodes/fragment/4/position = Vector2( -520, 480 )
 nodes/fragment/5/node = SubResource( 7 )
 nodes/fragment/5/position = Vector2( -1040, 420 )
 nodes/fragment/7/node = SubResource( 8 )
@@ -300,6 +300,6 @@ nodes/fragment/connections = PoolIntArray( 3, 0, 5, 0, 5, 0, 7, 0, 7, 0, 4, 0, 4
 
 [resource]
 shader = SubResource( 2 )
-shader_param/Variant = 0.0
+shader_param/Variant = 2.0
 shader_param/Distress = 0.0
-shader_param/Offset = Vector3( 0, 0, 0 )
+shader_param/Offset = Vector3( 0.659, 1.425, 0 )
