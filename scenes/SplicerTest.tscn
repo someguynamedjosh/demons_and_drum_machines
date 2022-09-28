@@ -61,7 +61,7 @@ shape = SubResource( 2 )
 
 [node name="Cassette" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.682573, 0.570283, -1.15458 )
-initial_content = ExtResource( 4 )
+audio = ExtResource( 4 )
 
 [node name="Cassette2" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02685, 0.570283, -1.15458 )
@@ -164,7 +164,9 @@ shape = SubResource( 11 )
 
 [node name="Player" type="AudioStreamPlayer3D" parent="FrontTable/Splicer"]
 stream = SubResource( 13 )
+unit_db = -5.0
 unit_size = 100.0
+max_db = 0.0
 emission_angle_degrees = 90.0
 attenuation_filter_db = 0.0
 

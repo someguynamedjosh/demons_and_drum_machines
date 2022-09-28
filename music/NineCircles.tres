@@ -1,7 +1,7 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
 [ext_resource path="res://music/533927_NK---Nine-Circles.wav" type="AudioStream" id=1]
-[ext_resource path="res://native/MusicSample.gdns" type="Script" id=2]
+[ext_resource path="res://native/MusicClip.gdns" type="Script" id=2]
 
 [resource]
 script = ExtResource( 2 )

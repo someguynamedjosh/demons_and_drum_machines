@@ -1,17 +1,14 @@
 extends Spatial
 
-const MusicBuffer = preload("res://native/MusicBuffer.gdns")
+const MusicClip = preload("res://native/MusicClip.gdns")
 
 export var hovered_mat: Material
 export var plain_mat: Material
 var contained_in
-export var initial_content: Resource
-var audio#: MusicBuffer#, actual annotation gives a segfault.
+export var audio: Resource#: MusicBuffer#, actual annotation gives a segfault and cannot be exported.
 
 func _ready():
-	audio = MusicBuffer.new()
-	if initial_content != null:
-		audio.load_sample_data(initial_content)
+	if audio != null:
 		audio = audio.trim(32.0, 48.0)
 		print(audio.duration())
 

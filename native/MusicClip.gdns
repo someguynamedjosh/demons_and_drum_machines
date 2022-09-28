@@ -3,5 +3,5 @@
 [ext_resource path="res://native/godot_audio_kit.tres" type="GDNativeLibrary" id=1]
 
 [resource]
-class_name = "MusicBuffer"
+class_name = "MusicClip"
 library = ExtResource( 1 )
