@@ -32,9 +32,14 @@ func handle_event(event: InputEvent):
 	elif event is InputEventMouseButton:
 		handle_mouse_button(event)
 
-func handle_mouse_movement(delta):
-	camera.rotation.y -= delta.x * 0.003
-	camera.rotation.x -= delta.y * 0.003
+func handle_mouse_movement(delta: Vector2):
+	delta = 0.003 * delta
+	if interact_state.last_interacted != null \
+		and interact_state.last_interacted.has_method("on_interact_move"):
+		interact_state.last_interacted.on_interact_move(delta)
+	if not interact_state.locked:
+		camera.rotation.y -= delta.x
+		camera.rotation.x -= delta.y
 
 func handle_key_press(scancode):
 	if scancode == KEY_ESCAPE:
