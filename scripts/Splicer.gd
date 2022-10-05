@@ -15,6 +15,7 @@ func _process(_delta):
 		play()
 	if not should_play and $Player.playing:
 		stop()
+	update_slot_locks()
 	animate_cassettes()
 
 # Called when the node enters the scene tree for the first time.
@@ -57,6 +58,10 @@ func update_knob_limits():
 	$StartKnob.set_snapping(snapping())
 	$DurationKnob.set_range(0.25, min(source_beats() - $StartKnob.get_display_value(), 16.0))
 	$DurationKnob.set_snapping(snapping())
+
+func update_slot_locks():
+	$InputSlot.locked = $PlaybackSwitch.activated
+	$OutputSlot.locked = $PlaybackSwitch.activated
 
 func update_screen():
 	screen_mat.set_shader_param("Start", snap($StartKnob.get_display_value()))

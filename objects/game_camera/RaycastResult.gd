@@ -14,9 +14,10 @@ func _init(c: StaticBody, p: Vector3):
 	position = p
 	if collider == null:
 		return
-	var candidate = collider.get_parent_spatial()
-	if candidate is Hoverable:
-		target = candidate
+	var candidate = collider
+	while candidate != null and not candidate is Hoverable:
+		candidate = candidate.get_parent_spatial()
+	target = candidate
 
 func target_movable() -> Movable:
 	if target is Movable:

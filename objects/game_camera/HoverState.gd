@@ -22,6 +22,8 @@ func get_hovering_root(ray: RaycastResult):
 			return null
 		elif not (ray.target as Slot).can_insert(hand_state.holding):
 			return null
+	elif ray.target is Slot and ray.target.locked:
+		return null
 	return ray.target
 
 func collect_object_and_holding(obj: Hoverable):
