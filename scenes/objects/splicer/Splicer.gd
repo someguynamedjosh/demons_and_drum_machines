@@ -1,12 +1,15 @@
 extends Spatial
 
 const Cassette = preload("res://scenes/objects/cassette/Cassette.gd")
+const SnappyAnimTimer = preload("res://scripts/animation/SnappyAnimTimer.gd")
 
 export var screen_mat: ShaderMaterial
 var source_data: Array = []
 var last_start_beat = 64
+var end = 0.0
+var wheel_readout_source = SnappyAnimTimer.new()
 
-func _process(_delta):
+func _process(delta):
 	update_knob_limits()
 	update_screen()
 	stop_if_past_end()
@@ -16,6 +19,7 @@ func _process(_delta):
 	if not should_play and $Player.playing:
 		stop()
 	update_slot_locks()
+	update_wheels(delta)
 	animate_cassettes()
 
 # Called when the node enters the scene tree for the first time.
@@ -63,12 +67,38 @@ func update_slot_locks():
 	$InputSlot.locked = $PlaybackSwitch.activated
 	$OutputSlot.locked = $PlaybackSwitch.activated
 
+func wheel_div_10(original_angle: float) -> float:
+	var divided = original_angle / 10.0
+	var fractional_part = fmod(divided, 36.0)
+	var end_buffer = 3.6
+	if fractional_part < (36.0 - end_buffer):
+		return divided - fractional_part
+	else:
+		return divided - fractional_part + 36.0 * (fractional_part - 36 + end_buffer) / end_buffer
+
+func update_wheels(delta):
+	var position = $StartKnob.get_display_value()
+	if $PlaybackSwitch.activated:
+		wheel_readout_source.process(1.0, true)
+		position = position_to_beat($Player.get_playback_position())
+	else:
+		wheel_readout_source.snappiness = -1.5
+		var progress = wheel_readout_source.process(delta, false)
+		position = lerp(position, end, progress)
+	var x = position * 360.0
+	x = wheel_div_10(x)
+	$NumWheel1.rotation_degrees.x = 18 + x
+	x = wheel_div_10(x)
+	$NumWheel2.rotation_degrees.x = 18 + x
+	x = wheel_div_10(x)
+	$NumWheel3.rotation_degrees.x = 18 + x
+
 func update_screen():
 	screen_mat.set_shader_param("Start", snap($StartKnob.get_display_value()))
 	screen_mat.set_shader_param("Duration", snap($DurationKnob.get_display_value()))
 
 func stop():
-	var end = position_to_beat($Player.get_playback_position())
+	end = position_to_beat($Player.get_playback_position())
 	var exact_end = last_start_beat + $DurationKnob.get_target_value()
 	if abs(beat_to_position(end) - beat_to_position(exact_end)) <= 0.1:
 		end = exact_end
