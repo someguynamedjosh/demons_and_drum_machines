@@ -8,6 +8,7 @@ var insertion_in_progress = false
 var locked = false
 export var start_with: PackedScene
 export var insertion_point_path: NodePath = "InsertionPoint"
+export var halfway_point_path: NodePath = ""
 
 func _ready():
 	if start_with != null:
@@ -24,6 +25,9 @@ func _ready():
 
 func get_insertion_point() -> Spatial:
 	return get_node(insertion_point_path) as Spatial
+
+func get_halfway_point() -> Spatial:
+	return get_node(halfway_point_path) as Spatial
 
 func can_insert(object: Spatial) -> bool:
 	return contents == null and not locked

@@ -1,7 +1,7 @@
 extends "res://scripts/animation/ProceduralAnimation.gd"
 
 func snappiness():
-	return -2.0
+	return -1.0
 
 func duration():
 	return 0.5

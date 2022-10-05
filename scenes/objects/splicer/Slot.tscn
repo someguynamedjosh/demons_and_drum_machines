@@ -109,6 +109,7 @@ extents = Vector3( 0.0251932, 0.0379947, 0.0618143 )
 [node name="Slot" type="Spatial"]
 script = ExtResource( 1 )
 insertion_point_path = NodePath("Hinge/InsertionPoint")
+halfway_point_path = NodePath("Hinge/HalfwayPoint")
 
 [node name="StaticCollision" type="StaticBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00407894, 0.00967488, 0 )
@@ -127,6 +128,9 @@ script = ExtResource( 1 )
 
 [node name="InsertionPoint" type="Spatial" parent="Hinge"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.0179175, 0.0353932, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="Hinge"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -0.0179175, 0.112184, -1.46724e-16 )
 
 [node name="MovingCollision" type="StaticBody" parent="Hinge"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0101538, 0.000393189, 0 )

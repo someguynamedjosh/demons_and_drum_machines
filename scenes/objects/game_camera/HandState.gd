@@ -64,7 +64,7 @@ func remove_object_from_slot(slot: Slot):
 		return
 	slot.on_remove()
 	obj.on_remove()
-	animations.start(RemoveAnim.new(held_parent), obj)
+	animations.start(RemoveAnim.new(slot, held_parent), obj)
 	set_holding(obj)
 	
 func set_holding(obj: Movable):

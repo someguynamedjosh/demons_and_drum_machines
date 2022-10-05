@@ -82,9 +82,13 @@ shape = SubResource( 3 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0294843, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot2"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot2"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot2"]
 
@@ -96,9 +100,13 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0705158, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot3"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot3"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot3"]
 
@@ -110,9 +118,13 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.170516, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot4"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot4"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot4"]
 
@@ -124,9 +136,13 @@ shape = SubResource( 15 )
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.270516, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot5"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot5"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot5"]
 
@@ -135,12 +151,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot6" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0540788, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0541993, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot6"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot6"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot6"]
 
@@ -149,12 +169,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot7" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0459212, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0458007, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot7"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot7"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot7"]
 
@@ -163,12 +187,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot8" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145921, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.145801, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot8"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot8"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot8"]
 
@@ -177,12 +205,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot9" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245921, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.245801, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot9"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot9"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot9"]
 
@@ -191,12 +223,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot10" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0794089, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0793552, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot10"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot10"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot10"]
 
@@ -205,12 +241,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot11" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0205911, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0206448, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot11"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot11"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot11"]
 
@@ -219,12 +259,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot12" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.120591, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.120645, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot12"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot12"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot12"]
 
@@ -233,12 +277,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot13" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.220591, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.220645, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot13"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot13"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot13"]
 
@@ -247,12 +295,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot14" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104729, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.104552, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot14"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot14"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot14"]
 
@@ -261,12 +313,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot15" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0047285, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00455189, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot15"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot15"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot15"]
 
@@ -275,12 +331,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot16" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0952715, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0954481, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot16"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot16"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot16"]
 
@@ -289,12 +349,16 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00554168, 0.0272579, 0 )
 shape = SubResource( 15 )
 
 [node name="Slot17" type="Spatial" parent="FrontTable/Rack"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195272, 0.097702, 0.0273143 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.195448, 0.097702, 0.0273143 )
 script = ExtResource( 1 )
 start_with = ExtResource( 3 )
+halfway_point_path = NodePath("HalfwayPoint")
 
 [node name="InsertionPoint" type="Spatial" parent="FrontTable/Rack/Slot17"]
 transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.0292346, 0 )
+
+[node name="HalfwayPoint" type="Spatial" parent="FrontTable/Rack/Slot17"]
+transform = Transform( -4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 0, 0.105336, 0 )
 
 [node name="StaticBody" type="StaticBody" parent="FrontTable/Rack/Slot17"]
 
