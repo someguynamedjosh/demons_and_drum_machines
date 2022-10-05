@@ -1,13 +1,16 @@
 extends "res://scripts/animation/FiniteProceduralAnimation.gd"
 
 const HoldAnim = preload("HoldAnim.gd")
+const Slot = preload("res://scripts/widgets/slot/Slot.gd")
 
 var start: Transform
-var destination: Node
+var slot: Slot
+var destination: Spatial
 
-func _init(d: Node):
-	assert(d != null)
-	destination = d
+func _init(s: Slot):
+	assert(s != null)
+	slot = s
+	destination = slot.get_insertion_point()
 
 func duration():
 	return 0.2
@@ -22,3 +25,5 @@ func on_finish():
 	target.get_parent().remove_child(target)
 	destination.add_child(target)
 	target.transform = Transform.IDENTITY
+	slot.on_insert_end()
+	Util.enable_colliders(target)

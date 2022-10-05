@@ -37,10 +37,9 @@ func handle_event(event: InputEvent):
 
 func handle_mouse_movement(delta: Vector2):
 	delta = 0.003 * delta
-	if interact_state.last_interacted != null \
-		and interact_state.last_interacted.has_method("on_interact_move"):
+	if interact_state.captured:
 		interact_state.last_interacted.on_interact_move(delta)
-	if not interact_state.locked:
+	else:
 		var camera_speed = 0.4 / zoom_state.zoom_factor
 		camera.rotation.y -= delta.x * camera_speed
 		camera.rotation.x -= delta.y * camera_speed

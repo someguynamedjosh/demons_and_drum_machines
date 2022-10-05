@@ -1,6 +1,6 @@
 extends Spatial
 
-const Cassette = preload("Cassette.gd")
+const Cassette = preload("res://objects/cassette/Cassette.gd")
 
 export var screen_mat: ShaderMaterial
 var source_data: Array = []
@@ -31,7 +31,7 @@ func snap(value):
 	return round(value / snapping()) * snapping()
 
 func source() -> Cassette:
-	return $InputSlot.holding
+	return $InputSlot.get_cassette()
 
 func source_beats() -> float:
 	if source() != null:
@@ -47,10 +47,10 @@ func source_duration() -> float:
 
 func animate_cassettes():
 	var spin = $PlaybackSwitch.active
-	if $InputSlot.holding != null:
-		$InputSlot.holding.spin = spin
-	if $OutputSlot.holding != null:
-		$OutputSlot.holding.spin = spin
+	if $InputSlot.get_cassette() != null:
+		$InputSlot.get_cassette().spin = spin
+	if $OutputSlot.get_cassette() != null:
+		$OutputSlot.get_cassette().spin = spin
 
 func update_knob_limits():
 	$StartKnob.set_range(0.0, source_beats() - 0.25)
@@ -67,8 +67,9 @@ func stop():
 	var exact_end = last_start_beat + $DurationKnob.get_target_value()
 	if abs(beat_to_position(end) - beat_to_position(exact_end)) <= 0.1:
 		end = exact_end
-	if $InputSlot.holding != null and $OutputSlot.holding != null:
-		$OutputSlot.holding.audio = $InputSlot.holding.audio.trim(last_start_beat, end)
+	if $InputSlot.get_cassette() != null and $OutputSlot.get_cassette() != null:
+		$OutputSlot.get_cassette().audio \
+			= $InputSlot.get_cassette().audio.trim(last_start_beat, end)
 	$Player.stop()
 	$Player.seek(0.0)
 	$PlaybackSwitch.deactivate()

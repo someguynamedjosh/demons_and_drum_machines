@@ -1,7 +1,9 @@
 extends Reference
 
 const HandState = preload("HandState.gd")
+const Hoverable = preload("res://scripts/widgets/Hoverable.gd")
 const RaycastResult = preload("RaycastResult.gd")
+const Slot = preload("res://scripts/widgets/slot/Slot.gd")
 
 var hand_state: HandState
 var last_hovered: Array = []
@@ -15,22 +17,20 @@ func physics_process(ray: RaycastResult):
 	set_hovering(now_hovering)
 	
 func get_hovering_root(ray: RaycastResult):
-	if ray.collider != null:
-		var root = ray.collider.get_parent_spatial()
-		if hand_state.holding != null:
-			if not root.has_method("can_take"):
-				return null
-			elif not root.can_take(hand_state.holding):
-				return null
-		return root
+	if hand_state.holding != null:
+		if not ray.target is Slot:
+			return null
+		elif not (ray.target as Slot).can_insert(hand_state.holding):
+			return null
+	return ray.target
 
-func collect_object_and_holding(obj):
+func collect_object_and_holding(obj: Hoverable):
 	if obj == null:
 		return []
 	elif hand_state.animations.currently_animating(obj):
 		return []
-	elif "holding" in obj:
-		var result = collect_object_and_holding(obj.holding)
+	elif obj is Slot:
+		var result = collect_object_and_holding((obj as Slot).contents)
 		result.append(obj)
 		return result
 	else:
@@ -45,10 +45,8 @@ func set_hovering(now_hovering: Array):
 			stop_hovering(obj)
 	last_hovered = now_hovering
 
-func start_hovering(obj):
-	if obj.has_method("on_hover_start"):
-		obj.on_hover_start()
+func start_hovering(obj: Hoverable):
+	obj.on_hover_start()
 
-func stop_hovering(obj):
-	if obj.has_method("on_hover_end"):
-		obj.on_hover_end()
+func stop_hovering(obj: Hoverable):
+	obj.on_hover_end()
