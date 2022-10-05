@@ -5,7 +5,7 @@
 [ext_resource path="res://scripts/widgets/slot/CassetteSlot.gd" type="Script" id=3]
 [ext_resource path="res://music/NineCircles.tres" type="Resource" id=4]
 [ext_resource path="res://scripts/Splicer.gd" type="Script" id=5]
-[ext_resource path="res://objects/cassette/cassette.tscn" type="PackedScene" id=6]
+[ext_resource path="res://objects/cassette/Cassette.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scripts/widgets/interactable/Switch.gd" type="Script" id=7]
 [ext_resource path="res://scripts/widgets/interactable/Knob.gd" type="Script" id=9]
 
