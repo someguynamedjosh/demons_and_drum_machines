@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scripts/input/GameCamera.gd" type="Script" id=1]
+[ext_resource path="res://sprites/crosshair.png" type="Texture" id=2]
+[ext_resource path="res://materials/cursor.tres" type="Material" id=3]
+
+[node name="GameCamera" type="Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.26475, 0.119107 )
+fov = 29.8308
+script = ExtResource( 1 )
+place_cursor_mat = ExtResource( 3 )
+
+[node name="Crosshair" type="Sprite3D" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.336522 )
+pixel_size = 0.0001
+texture = ExtResource( 2 )
+
+[node name="HeldParent" type="Spatial" parent="."]
+transform = Transform( 0.691187, -0.39904, -0.602517, -0.387238, 0.49943, -0.774994, 0.610169, 0.768984, 0.190676, 0.108265, -0.042625, -0.446199 )
+
+[node name="ObjectRayCast" type="RayCast" parent="."]
+cast_to = Vector3( 0, 0, -10 )

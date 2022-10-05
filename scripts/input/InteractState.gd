@@ -16,11 +16,11 @@ func stop_interacting():
 		locked = false
 		last_interacted = null
 
-func physics_process(object: RaycastResult):
+func physics_process(ray: RaycastResult):
 	if interaction_requested:
 		interaction_requested = false
-		if object.collider != null:
-			start_interacting_with_collider(object.collider)
+		if ray.collider != null:
+			start_interacting_with_collider(ray.collider)
 
 func start_interacting_with_collider(collider):
 	var root_obj = collider.get_parent_spatial()

@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://objects/cassettes/Cassette.tres" type="ArrayMesh" id=1]
+[ext_resource path="res://scripts/Cassette.gd" type="Script" id=2]
+[ext_resource path="res://materials/cursor.tres" type="Material" id=3]
+[ext_resource path="res://objects/cassettes/distressed_labels.tres" type="Material" id=4]
+[ext_resource path="res://objects/cassettes/LeftSpool.tres" type="ArrayMesh" id=5]
+
+[sub_resource type="BoxShape" id=1]
+extents = Vector3( 0.0359187, 0.00621176, 0.0536513 )
+
+[node name="Cassette" type="Spatial"]
+script = ExtResource( 2 )
+hovered_mat = ExtResource( 3 )
+
+[node name="Mesh" type="MeshInstance" parent="."]
+transform = Transform( -7.54979e-08, -1.94707e-07, -1, 1, 7.54979e-08, -7.54979e-08, 7.54979e-08, -1, 1.94707e-07, -2.57953e-10, 0.00590129, 0 )
+mesh = ExtResource( 1 )
+material/1 = ExtResource( 4 )
+
+[node name="LeftSpool" type="MeshInstance" parent="."]
+transform = Transform( -7.54979e-08, -1.94707e-07, -1, 1, 7.54979e-08, -7.54979e-08, 7.54979e-08, -1, 1.94707e-07, -0.0190373, 0.00590129, -0.0058906 )
+mesh = ExtResource( 5 )
+
+[node name="RightSpool" type="MeshInstance" parent="."]
+transform = Transform( -7.54979e-08, -1.94707e-07, -1, 1, 7.54979e-08, -7.54979e-08, 7.54979e-08, -1, 1.94707e-07, 0.0187668, 0.00590129, -0.00589061 )
+mesh = ExtResource( 5 )
+
+[node name="StaticBody" type="StaticBody" parent="."]
+
+[node name="CollisionShape" type="CollisionShape" parent="StaticBody"]
+transform = Transform( -4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.00590157, 0 )
+shape = SubResource( 1 )

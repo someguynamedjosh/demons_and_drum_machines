@@ -66,7 +66,6 @@ func stop():
 	var end = position_to_beat($Player.get_playback_position())
 	var exact_end = last_start_beat + $DurationKnob.get_target_value()
 	if abs(beat_to_position(end) - beat_to_position(exact_end)) <= 0.1:
-		print(last_start_beat, ' Full!')
 		end = exact_end
 	if $InputSlot.holding != null and $OutputSlot.holding != null:
 		$OutputSlot.holding.audio = $InputSlot.holding.audio.trim(last_start_beat, end)

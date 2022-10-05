@@ -37,8 +37,7 @@ func get_raycast_result(from: RayCast) -> RaycastResult:
 
 func _physics_process(_delta):
 	input_handler.physics_update()
-	var object = get_raycast_result($ObjectRayCast)
-	var container = get_raycast_result($ContainerRayCast)
-	hover_state.physics_process(object)
-	interact_state.physics_process(object)
-	hand_state.physics_process(object, container)
+	var ray = get_raycast_result($ObjectRayCast)
+	hover_state.physics_process(ray)
+	interact_state.physics_process(ray)
+	hand_state.physics_process(ray)

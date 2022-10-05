@@ -1,7 +1,6 @@
 extends MeshInstance
 
 export var hovered_mat: Material
-export var default_mat: Material
 var target_value = 0.0
 var display_value = 0.0
 var snapping = null
@@ -58,7 +57,7 @@ func _process(delta):
 	var speed = 10.0
 	if not interacting:
 		display_value = lerp(target_value, display_value, pow(2.0, -delta * speed))
-	rotation.z = -display_value
+	rotation.x = -display_value
 
 func on_interact_start():
 	interacting = true
@@ -69,7 +68,7 @@ func on_interact_end():
 	target_value = clamp_and_snap(target_value)
 	
 func on_hover_start():
-	set_surface_material(0, hovered_mat)
+	material_override = hovered_mat
 
 func on_hover_end():
-	set_surface_material(0, default_mat)
+	material_override = null

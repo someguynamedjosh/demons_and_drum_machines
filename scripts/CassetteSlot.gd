@@ -20,6 +20,9 @@ func _ready():
 		instance.contained_in = self
 		on_insert(instance)
 
+func get_insertion_point():
+	return $InsertionPoint
+
 func can_take(object: Spatial) -> bool:
 	return object is Cassette and not holding
 

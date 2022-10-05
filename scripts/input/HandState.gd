@@ -1,9 +1,12 @@
 extends Reference
 
+const FinishInsertingAction = preload("FinishInsertingAction.gd")
 const HandAnimationSystem = preload('HandAnimationSystem.gd')
+const InsertAnim = preload('res://scripts/animation/InsertAnim.gd')
 const PickUpAnim = preload('res://scripts/animation/PickUpAnim.gd')
 const PutDownAnim = preload('res://scripts/animation/PutDownAnim.gd')
 const RaycastResult = preload("RaycastResult.gd")
+const RemoveAnim = preload('res://scripts/animation/RemoveAnim.gd')
 
 var camera: Spatial
 var held_parent: Spatial
@@ -31,13 +34,16 @@ func is_holding_anything():
 func process(delta: float):
 	animations.process(delta)
 
-func physics_process(object_ray: RaycastResult, container_ray: RaycastResult):
+func physics_process(ray: RaycastResult):
 	if pick_up_requested:
 		pick_up_requested = false
-		var obj = object_hit_by_raycast_result(object_ray)
-		pick_up_object(obj)
-	var container = get_targeted_container(container_ray)
-	var target_transform = object_place_transform(object_ray, container)
+		var obj_or_container = object_hit_by_raycast_result(ray)
+		if "holding" in obj_or_container:
+			pick_up_object(obj_or_container.holding)
+		else:
+			pick_up_object(obj_or_container)
+	var container = get_targeted_container(ray)
+	var target_transform = object_place_transform(ray, container)
 	update_cursor(target_transform)
 	if put_down_requested:
 		put_down_requested = false
@@ -54,12 +60,15 @@ func object_with_collider(collider):
 
 func pick_up_object(obj):
 	if obj != null and obj.has_method("on_pick_up"):
-		if not try_remove_object_from_container(obj):
-			return
-		obj.contained_in = null
+		if obj.contained_in == null:
+			animations.start(PickUpAnim.new(held_parent), obj)
+		else:
+			if not try_remove_object_from_container(obj):
+				return
+			animations.start(RemoveAnim.new(held_parent), obj)
 		obj.on_pick_up()
 		holding = obj
-		animations.start(PickUpAnim.new(held_parent), obj)
+		Util.disable_colliders(obj)
 
 func try_remove_object_from_container(obj):
 	if obj.contained_in != null:
@@ -68,11 +77,12 @@ func try_remove_object_from_container(obj):
 				return false
 		if obj.contained_in.has_method("on_remove"):
 			obj.contained_in.on_remove(obj)
+		obj.contained_in = null
 	return true
 
-func get_targeted_container(container_ray: RaycastResult):
-	if container_ray.collider != null:
-		var container = object_with_collider(container_ray.collider)
+func get_targeted_container(obj_ray: RaycastResult):
+	if obj_ray.collider != null:
+		var container = object_with_collider(obj_ray.collider)
 		if container.has_method("can_take"):
 			if container.can_take(holding):
 				return container
@@ -80,7 +90,7 @@ func get_targeted_container(container_ray: RaycastResult):
 
 func object_place_transform(object_ray: RaycastResult, container):
 	if container != null:
-		return container.get_node("InsertionPoint").global_transform
+		return container.get_insertion_point().global_transform
 	elif object_ray.collider != null:
 		return Transform.IDENTITY.translated(object_ray.position) \
 			* Transform.IDENTITY.rotated(Vector3.UP, camera.rotation.y)
@@ -102,9 +112,16 @@ func put_down_object(target_transform, container):
 		return
 	if holding.has_method("on_put_down"):
 		holding.on_put_down()
-	if container != null:
+	if container == null:
+		var anim = PutDownAnim.new(target_transform)
+		Util.enable_colliders(holding)
+		animations.start(anim, holding)
+	else:
 		holding.contained_in = container
+		container.insertion_in_progress = true
 		if container.has_method("on_insert"):
 			container.on_insert(holding)
-	animations.start(PutDownAnim.new(target_transform), holding)
+		var anim = InsertAnim.new(container.get_insertion_point())
+		var action = FinishInsertingAction.new(container, holding)
+		animations.start_w_finish_action(anim, holding, action)
 	holding = null

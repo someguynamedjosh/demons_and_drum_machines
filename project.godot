@@ -24,6 +24,10 @@ config/name="demons_and_drum_machines"
 run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+Util="*res://scripts/global/Util.gd"
+
 [display]
 
 window/size/width=1280
