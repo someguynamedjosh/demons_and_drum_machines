@@ -10,7 +10,7 @@ func _process(_delta):
 	update_knob_limits()
 	update_screen()
 	stop_if_past_end()
-	var should_play = $PlaybackSwitch.active and source() != null
+	var should_play = $PlaybackSwitch.activated and source() != null
 	if should_play and not $Player.playing:
 		play()
 	if not should_play and $Player.playing:
@@ -46,7 +46,7 @@ func source_duration() -> float:
 		return 0.0
 
 func animate_cassettes():
-	var spin = $PlaybackSwitch.active
+	var spin = $PlaybackSwitch.activated
 	if $InputSlot.get_cassette() != null:
 		$InputSlot.get_cassette().spin = spin
 	if $OutputSlot.get_cassette() != null:
@@ -82,7 +82,7 @@ func stop_if_past_end():
 	if $DurationKnob.get_target_value() < 1.0:
 		buffer = 0.05
 	var past_end = $Player.get_playback_position() >= min(end, source_duration()) - buffer
-	if past_end and $PlaybackSwitch.active:
+	if past_end and $PlaybackSwitch.activated:
 		stop()
 
 func play():

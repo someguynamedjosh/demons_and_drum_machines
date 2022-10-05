@@ -26,7 +26,8 @@ config/icon="res://icon.png"
 
 [autoload]
 
-Util="*res://scripts/global/Util.gd"
+Constants="*res://objects/globals/constants.tscn"
+Util="*res://objects/globals/Util.gd"
 
 [display]
 

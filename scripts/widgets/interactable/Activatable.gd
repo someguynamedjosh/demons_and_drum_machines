@@ -1,15 +1,15 @@
 extends "Interactable.gd"
 
-var active: bool = false
+var activated: bool = false
 signal activated()
 signal deactivated()
 
 func activate():
-	if not active:
-		active = true
+	if not activated:
+		activated = true
 		emit_signal("activated")
 
 func deactivate():
-	if active:
-		active = false
+	if activated:
+		activated = false
 		emit_signal("deactivated")

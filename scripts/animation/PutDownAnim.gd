@@ -16,5 +16,4 @@ func evaluate():
 	target.transform = start.interpolate_with(destination, progress())
 
 func on_finish():
-	print('enable')
 	Util.enable_colliders(target)

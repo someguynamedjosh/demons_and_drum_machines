@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://materials/cursor.tres" type="Material" id=1]
+
+[sub_resource type="GDScript" id=1]
+resource_name = "Constants"
+script/source = "extends Spatial
+
+export var cursor_mat: SpatialMaterial
+"
+
+[node name="Spatial" type="Spatial"]
+script = SubResource( 1 )
+cursor_mat = ExtResource( 1 )
