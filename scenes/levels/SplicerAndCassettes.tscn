@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/objects/cassette/Cassette.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/objects/splicer/Splicer.tscn" type="PackedScene" id=4]
 [ext_resource path="res://scenes/objects/game_camera/game_camera.tscn" type="PackedScene" id=5]
-[ext_resource path="res://music/weird_timing/Envision.tres" type="Resource" id=6]
+[ext_resource path="res://music/EthernightClub.tres" type="Resource" id=6]
 
 [sub_resource type="CubeMesh" id=1]
 
