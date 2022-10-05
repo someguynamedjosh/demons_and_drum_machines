@@ -73,7 +73,7 @@ func set_holding(obj: Movable):
 	Util.disable_colliders(obj)
 
 func object_place_transform(ray: RaycastResult):
-	if ray.target_slot() != null:
+	if ray.target_slot() != null and ray.target_slot().can_insert(holding):
 		return ray.target_slot().get_insertion_point().global_transform
 	elif ray.collider != null:
 		return Transform.IDENTITY.translated(ray.position) \
@@ -96,7 +96,7 @@ func put_down_object(target_transform: Transform, slot: Slot):
 		return
 	holding.on_put_down()
 	var anim
-	if slot == null:
+	if slot == null or not slot.can_insert(holding):
 		anim = PutDownAnim.new(target_transform)
 		Util.enable_colliders(holding)
 	else:
