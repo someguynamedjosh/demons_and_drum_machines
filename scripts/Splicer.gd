@@ -1,6 +1,6 @@
 extends Spatial
 
-const Cassette = preload("res://objects/cassette/Cassette.gd")
+const Cassette = preload("res://scenes/objects/cassette/Cassette.gd")
 
 export var screen_mat: ShaderMaterial
 var source_data: Array = []
