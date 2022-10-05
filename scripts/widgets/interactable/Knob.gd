@@ -62,3 +62,4 @@ func captures_cursor():
 
 func on_interact_end():
 	target_value = clamp_and_snap(target_value)
+	.on_interact_end()
