@@ -55,7 +55,7 @@ func _process(delta):
 	var speed = 10.0
 	if not interacting:
 		display_value = lerp(target_value, display_value, pow(2.0, -delta * speed))
-	$Display.rotation.x = -display_value
+	$Display.rotation.y = -display_value
 
 func captures_cursor():
 	return true
