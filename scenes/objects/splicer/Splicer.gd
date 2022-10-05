@@ -60,7 +60,7 @@ func animate_cassettes():
 func update_knob_limits():
 	$StartKnob.set_range(0.0, source_beats() - 0.25)
 	$StartKnob.set_snapping(snapping())
-	$DurationKnob.set_range(0.25, min(source_beats() - $StartKnob.get_display_value(), 16.0))
+	$DurationKnob.set_range(0.25, min(source_beats() - $StartKnob.target_value, 16.0))
 	$DurationKnob.set_snapping(snapping())
 
 func update_slot_locks():
@@ -95,7 +95,7 @@ func update_wheels(delta):
 
 func update_screen():
 	screen_mat.set_shader_param("Start", snap($StartKnob.get_display_value()))
-	screen_mat.set_shader_param("Duration", snap($DurationKnob.get_display_value()))
+	screen_mat.set_shader_param("Duration", snap($DurationKnob.target_value))
 
 func stop():
 	end = position_to_beat($Player.get_playback_position())
