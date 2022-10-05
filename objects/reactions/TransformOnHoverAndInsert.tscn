@@ -15,5 +15,5 @@ func condition_met() -> bool:
 	return react_to.hovered or react_to.insertion_in_progress
 "
 
-[node name="TransformWhenActive" type="Node"]
+[node name="TransformOnHoverAndInsert" type="Node"]
 script = SubResource( 1 )
