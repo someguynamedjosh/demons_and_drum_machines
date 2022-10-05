@@ -1,7 +1,5 @@
 extends "res://scripts/animation/FiniteProceduralAnimation.gd"
 
-const HoldAnim = preload("HoldAnim.gd")
-
 var start: Transform
 var destination: Transform
 
@@ -18,4 +16,5 @@ func evaluate():
 	target.transform = start.interpolate_with(destination, progress())
 
 func on_finish():
-	pass
+	print('enable')
+	Util.enable_colliders(target)

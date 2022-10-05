@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/input/GameCamera.gd" type="Script" id=1]
+[ext_resource path="res://objects/game_camera/GameCamera.gd" type="Script" id=1]
 [ext_resource path="res://sprites/crosshair.png" type="Texture" id=2]
 [ext_resource path="res://materials/cursor.tres" type="Material" id=3]
 

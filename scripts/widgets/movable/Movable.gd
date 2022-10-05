@@ -22,7 +22,6 @@ func on_insert_start(slot: Slot):
 func on_insert_end():
 	pass
 
-func on_remove(slot: Slot):
-	assert(slot == contained_in)
-	emit_signal("removed", slot)
+func on_remove():
+	emit_signal("removed", contained_in)
 	contained_in = null

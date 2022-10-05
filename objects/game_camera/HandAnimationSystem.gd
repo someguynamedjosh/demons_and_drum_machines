@@ -1,6 +1,6 @@
 extends Reference
 
-const ProceduralAnimation = preload("../animation/ProceduralAnimation.gd")
+const ProceduralAnimation = preload("res://scripts/animation/ProceduralAnimation.gd")
 
 var active_animations: Dictionary = {}
 

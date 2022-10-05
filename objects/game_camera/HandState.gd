@@ -41,7 +41,10 @@ func physics_process(ray: RaycastResult):
 		if ray.target_slot() != null:
 			remove_object_from_slot(ray.target_slot())
 		elif ray.target_movable() != null:
-			pick_up_object(ray.target_movable())
+			if ray.target_movable().contained_in != null:
+				remove_object_from_slot(ray.target_movable().contained_in)
+			else:
+				pick_up_object(ray.target_movable())
 	var target_transform = object_place_transform(ray)
 	update_cursor(target_transform)
 	if put_down_requested:
@@ -54,12 +57,13 @@ func pick_up_object(obj: Movable):
 		set_holding(obj)
 
 func remove_object_from_slot(slot: Slot):
-	var obj = slot.contents
+	var obj: Movable = slot.contents
 	if obj == null:
 		return
 	if not slot.can_remove():
 		return
 	slot.on_remove()
+	obj.on_remove()
 	animations.start(RemoveAnim.new(held_parent), obj)
 	set_holding(obj)
 	
