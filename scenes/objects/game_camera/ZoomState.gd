@@ -16,7 +16,7 @@ func _init(c: Camera, cr: Spatial, h: Spatial):
 
 func offset_zoom_factor(delta):
 	zoom_factor *= pow(increment, delta)
-	zoom_factor = clamp(zoom_factor, pow(increment, -4), pow(increment, 7))
+	zoom_factor = clamp(zoom_factor, pow(increment, -4), pow(increment, 10))
 	update_camera()
 
 func update_camera():

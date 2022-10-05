@@ -24,10 +24,10 @@ func _process(delta):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	$DurationKnob.target_value = 4.0
 
 func snapping():
-	if $DurationKnob.get_target_value() >= 8.125:
+	if $DurationKnob.get_target_value() > 8.0:
 		return 0.5
 	else:
 		return 0.25
@@ -137,5 +137,5 @@ func position_to_beat(position: float):
 	else:
 		return (position - source().audio.start_time()) / source().audio.beat_time()
 
-func _on_source_insert(_new_source):
+func _on_InputSlot_inserted(obj):
 	$StartKnob.set_animated(0.0)
