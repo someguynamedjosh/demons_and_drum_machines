@@ -28,7 +28,7 @@ func clear_material_override():
 script = SubResource( 1 )
 
 [node name="TransformWhenActive" parent="." instance=ExtResource( 2 )]
-snappiness = 4.045
+snappiness = -4.045
 translation = Vector3( 0, -0.005, 0 )
 rotation = -0.5
 rotation_axis = Vector3( 0, 0, 1 )

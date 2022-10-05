@@ -9,7 +9,7 @@ func _init(d: Spatial):
 	destination = d
 
 func duration():
-	return 0.2
+	return 0.3
 
 func on_start():
 	start = target.global_transform

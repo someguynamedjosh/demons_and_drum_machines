@@ -6,9 +6,6 @@ var destination: Transform
 func _init(d: Transform):
 	destination = d
 
-func duration():
-	return 0.2
-
 func on_start():
 	start = target.transform
 

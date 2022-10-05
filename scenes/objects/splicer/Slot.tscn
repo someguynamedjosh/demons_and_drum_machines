@@ -136,7 +136,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.009036, 0.0437694, 8.9407e-
 shape = SubResource( 35 )
 
 [node name="TransformOnHoverAndInsert" parent="Hinge" instance=ExtResource( 6 )]
-anim_time = 0.5
-snappiness = 2.0
+anim_time = 0.4
+snappiness = -1.5
 rotation = -0.6
 rotation_axis = Vector3( 0, 0, 1 )

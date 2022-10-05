@@ -12,9 +12,6 @@ func _init(s: Slot):
 	slot = s
 	destination = slot.get_insertion_point()
 
-func duration():
-	return 0.2
-
 func on_start():
 	start = target.transform
 
