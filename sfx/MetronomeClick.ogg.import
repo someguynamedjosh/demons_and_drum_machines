@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/MetronomeClick.ogg-42b5b81c0b8a99f2d6fc155a7762fe5d.oggstr"
+
+[deps]
+
+source_file="res://sfx/MetronomeClick.ogg"
+dest_files=[ "res://.import/MetronomeClick.ogg-42b5b81c0b8a99f2d6fc155a7762fe5d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

@@ -2,7 +2,7 @@ extends "res://scripts/widgets/movable/Movable.gd"
 
 const MusicClip = preload("res://native/MusicClip.gdns")
 
-export var audio: Resource#: MusicBuffer#, actual annotation gives a segfault and cannot be exported.
+export var audio: Resource#: MusicClip#, actual annotation gives a segfault and cannot be exported.
 var spin: bool = false
 var speed: float = 0.0
 
