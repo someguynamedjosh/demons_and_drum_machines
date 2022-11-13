@@ -5,9 +5,12 @@ const Cassette = preload("res://scenes/objects/cassette/Cassette.gd")
 
 onready var sample_sources = [$Input/Slot1,$Input/Slot2,$Input/Slot3,$Input/Slot4,$Input/Slot5,$Input/Slot6,$Input/Slot7,$Input/Slot8]
 onready var players = [$Player1,$Player2,$Player3,$Player4,$Player5,$Player6,$Player7,$Player8]
+var channel_clips = [MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new()]
 var queued_samples = [null, null, null, null, null, null, null, null]
 var pitch_scale = 1.0
 var exact_beat = 0.0
+var last_write = 0.0
+var write_tempo = 100.0
 
 func _ready():
 	pass # Replace with function body.
@@ -17,6 +20,7 @@ func _process(delta):
 	if fmod(exact_beat, 4.0) > metronome_beat + 2.0:
 		exact_beat += 4.0
 	exact_beat = exact_beat - fmod(exact_beat, 4.0) + metronome_beat
+	write_if_needed()
 	for index in 8:
 		if queued_samples[index] != null:
 			queued_samples[index] += delta
@@ -40,11 +44,9 @@ func actually_play_sample(index: int):
 	var pitch = c.audio.beat_time() * tempo() / 60.0
 	player.pitch_scale = pitch
 	player.play(c.audio.start_time() \
-		+ offset * c.audio.beat_time() / (60.0 / 100))
-	var target = $Output.get_cassette()
-	if target != null:
-		var at = exact_beat - fmod(exact_beat, 1.0 / snapping_divisor())
-		target.audio.write_sample(at, c.audio, 0.0, c.audio.beats(), pitch)
+		+ fmod(offset, c.audio.beats()) * c.audio.beat_time() / (60.0 / 100))
+	var at = exact_beat - fmod(exact_beat, 1.0 / snapping_divisor())
+	channel_clips[index].write_sample(at, c.audio, 0.0, c.audio.beats(), pitch)
 
 func fire_sample(index: int):
 	queue_sample(index)
@@ -100,34 +102,41 @@ func update_tempo():
 	var tempo = tempo()
 	pitch_scale = tempo / 100.0
 	$Metronome1.pitch_scale = pitch_scale
-	var target = $Output.get_cassette()
-	if target != null:
-		target.audio.set_beat_time(60.0 / tempo)
 	for index in 8:
 		var c = sample_sources[index].get_cassette()
 		var player = players[index]
 		if c != null:
 			player.pitch_scale = c.audio.beat_time() * tempo() / 60.0
-		
+
+func write_if_needed():
+	if last_write >= exact_beat - 2:
+		return
+	var target = $Output.get_cassette()
+	if target != null:
+		target.audio.set_beat_time(60.0 / write_tempo)
+		if last_write == 0.0:
+			target.audio.clear()
+		target.audio.mixdown(channel_clips, last_write, exact_beat - 2)
+		last_write = exact_beat - 2
 
 func start_recording():
 	update_tempo()
+	write_tempo = tempo()
+	for clip in channel_clips:
+		clip.clear()
+		clip.set_beat_time(60.0 / write_tempo)
 	$Metronome1.play()
-	var target = $Output.get_cassette()
 	exact_beat = 0.0
-	if target != null:
-		target.audio.clear()
+	last_write = 0.0
 
 func stop_recording():
+	exact_beat = exact_beat - fmod(exact_beat, 4.0) + 6.0
+	write_if_needed()
 	update_tempo()
-	var target = $Output.get_cassette()
-	if target != null:
-		target.audio.extend(exact_beat - fmod(exact_beat, 4.0) + 4.0)
 	if $Sampler/PausePlay.activated:
 		$Sampler/PausePlay.deactivate()
 	$Metronome1.stop()
 	$Metronome1.seek(0.0)
-	print($Metronome1.get_playback_position())
 	for index in 8:
 		players[index].stop()
 
