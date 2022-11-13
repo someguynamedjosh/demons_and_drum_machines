@@ -7,6 +7,7 @@ onready var sample_sources = [$Input/Slot1,$Input/Slot2,$Input/Slot3,$Input/Slot
 onready var players = [$Player1,$Player2,$Player3,$Player4,$Player5,$Player6,$Player7,$Player8]
 var channel_clips = [MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new(), MusicClip.new()]
 var queued_samples = [null, null, null, null, null, null, null, null]
+var write_looping_sample_again_timers = [null, null, null, null, null, null, null, null]
 var pitch_scale = 1.0
 var exact_beat = 0.0
 var last_write = 0.0
@@ -22,6 +23,16 @@ func _process(delta):
 	exact_beat = exact_beat - fmod(exact_beat, 4.0) + metronome_beat
 	write_if_needed()
 	for index in 8:
+		if write_looping_sample_again_timers[index] != null:
+			var c: Cassette = sample_sources[index].get_cassette()
+			if c == null or not players[index].playing:
+				write_looping_sample_again_timers[index] = null
+			else:
+				if write_looping_sample_again_timers[index] <= exact_beat:
+					var at = write_looping_sample_again_timers[index]
+					var pitch = c.audio.beat_time() * write_tempo / 60.0
+					channel_clips[index].write_sample(at, c.audio, 0.0, c.audio.beats(), pitch)
+					write_looping_sample_again_timers[index] += c.audio.beats()
 		if queued_samples[index] != null:
 			queued_samples[index] += delta
 			if queued_samples[index] >= 0.0 \
@@ -46,7 +57,10 @@ func actually_play_sample(index: int):
 	player.play(c.audio.start_time() \
 		+ fmod(offset, c.audio.beats()) * c.audio.beat_time() / (60.0 / 100))
 	var at = exact_beat - fmod(exact_beat, 1.0 / snapping_divisor())
+	pitch = c.audio.beat_time() * write_tempo / 60.0
 	channel_clips[index].write_sample(at, c.audio, 0.0, c.audio.beats(), pitch)
+	if c.audio.is_looping():
+		write_looping_sample_again_timers[index] = at + c.audio.beats()
 
 func fire_sample(index: int):
 	queue_sample(index)
