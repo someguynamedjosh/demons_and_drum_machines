@@ -37,13 +37,14 @@ func actually_play_sample(index: int):
 	else:
 		c.audio.set_looping($Sampler/LoopB.activated)
 	var offset = quantized_play_offset()
-	player.pitch_scale = c.audio.beat_time() * tempo() / 60.0
+	var pitch = c.audio.beat_time() * tempo() / 60.0
+	player.pitch_scale = pitch
 	player.play(c.audio.start_time() \
 		+ offset * c.audio.beat_time() / (60.0 / 100))
 	var target = $Output.get_cassette()
 	if target != null:
 		var at = exact_beat - fmod(exact_beat, 1.0 / snapping_divisor())
-		target.audio.write_sample(at, c.audio, 0.0, c.audio.beats(), 1.0)
+		target.audio.write_sample(at, c.audio, 0.0, c.audio.beats(), pitch)
 
 func fire_sample(index: int):
 	queue_sample(index)
@@ -119,6 +120,9 @@ func start_recording():
 
 func stop_recording():
 	update_tempo()
+	var target = $Output.get_cassette()
+	if target != null:
+		target.audio.extend(exact_beat - fmod(exact_beat, 4.0) + 4.0)
 	if $Sampler/PausePlay.activated:
 		$Sampler/PausePlay.deactivate()
 	$Metronome1.stop()
