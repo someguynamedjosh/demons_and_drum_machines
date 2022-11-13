@@ -121,6 +121,7 @@ func stop_if_past_end():
 		stop()
 
 func play():
+	source().audio.set_looping(false)
 	source().audio.play_audio($Player)
 	last_start_beat = $StartKnob.get_target_value()
 	$Player.play(beat_to_position(last_start_beat))

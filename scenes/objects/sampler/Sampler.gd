@@ -7,11 +7,17 @@ onready var sample_sources = [$Input/Slot1,$Input/Slot2,$Input/Slot3,$Input/Slot
 onready var players = [$Player1,$Player2,$Player3,$Player4,$Player5,$Player6,$Player7,$Player8]
 var queued_samples = [null, null, null, null, null, null, null, null]
 var pitch_scale = 1.0
+var exact_beat = 0.0
 
 func _ready():
 	pass # Replace with function body.
 
 func _process(delta):
+	var metronome_beat = $Metronome1.get_playback_position() * 100.0 / 60.0
+	if fmod(exact_beat, 4.0) > metronome_beat + 2.0:
+		exact_beat += 4.0
+	exact_beat = exact_beat - fmod(exact_beat, 4.0) + metronome_beat
+	print(exact_beat)
 	for index in 8:
 		if queued_samples[index] != null:
 			queued_samples[index] += delta
@@ -35,6 +41,11 @@ func actually_play_sample(index: int):
 	player.pitch_scale = c.audio.beat_time() * tempo() / 60.0
 	player.play(c.audio.start_time() \
 		+ offset * c.audio.beat_time() / (60.0 / 100))
+	var target = $Output.get_cassette()
+	if target != null:
+		var at = exact_beat - fmod(exact_beat, 1 / snapping_divisor())
+		print(at)
+		target.audio.write_sample(at, c.audio, 0.0, c.audio.beats(), 1.0)
 
 func fire_sample(index: int):
 	queue_sample(index)
@@ -66,16 +77,18 @@ func tempo():
 	tempo = pow(2, (tempo - 2) / 2) * 100.0
 	return tempo
 
-# The time interval that button presses should be snapped to to make them in
-# time with the beat selected by the user.
-func quantized_play_snapping():
+func snapping_divisor():
 	var snapping = 1
 	if tempo() < 90.0:
 		snapping = 2
 	if tempo() < 65.0:
 		snapping = 6
-	return 60.0 / 100 / snapping
+	return snapping
 
+# The time interval that button presses should be snapped to to make them in
+# time with the beat selected by the user.
+func quantized_play_snapping():
+	return 60.0 / 100 / snapping_divisor()
 
 # How far in we should skip from the start of a sample to make it sync up with
 # the beat selected by the user.
@@ -98,8 +111,14 @@ func update_tempo():
 func start_recording():
 	update_tempo()
 	$Metronome1.play()
+	var target = $Output.get_cassette()
+	exact_beat = 0.0
+	if target != null:
+		target.audio.clear()
 
 func stop_recording():
+	if $Sampler/PausePlay.activated:
+		$Sampler/PausePlay.deactivate()
 	$Metronome1.stop()
 	for index in 8:
 		players[index].stop()
