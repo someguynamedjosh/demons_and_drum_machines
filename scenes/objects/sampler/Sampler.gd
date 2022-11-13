@@ -17,7 +17,6 @@ func _process(delta):
 	if fmod(exact_beat, 4.0) > metronome_beat + 2.0:
 		exact_beat += 4.0
 	exact_beat = exact_beat - fmod(exact_beat, 4.0) + metronome_beat
-	print(exact_beat)
 	for index in 8:
 		if queued_samples[index] != null:
 			queued_samples[index] += delta
@@ -43,8 +42,7 @@ func actually_play_sample(index: int):
 		+ offset * c.audio.beat_time() / (60.0 / 100))
 	var target = $Output.get_cassette()
 	if target != null:
-		var at = exact_beat - fmod(exact_beat, 1 / snapping_divisor())
-		print(at)
+		var at = exact_beat - fmod(exact_beat, 1.0 / snapping_divisor())
 		target.audio.write_sample(at, c.audio, 0.0, c.audio.beats(), 1.0)
 
 func fire_sample(index: int):
@@ -101,6 +99,9 @@ func update_tempo():
 	var tempo = tempo()
 	pitch_scale = tempo / 100.0
 	$Metronome1.pitch_scale = pitch_scale
+	var target = $Output.get_cassette()
+	if target != null:
+		target.audio.set_beat_time(60.0 / tempo)
 	for index in 8:
 		var c = sample_sources[index].get_cassette()
 		var player = players[index]
@@ -117,9 +118,12 @@ func start_recording():
 		target.audio.clear()
 
 func stop_recording():
+	update_tempo()
 	if $Sampler/PausePlay.activated:
 		$Sampler/PausePlay.deactivate()
 	$Metronome1.stop()
+	$Metronome1.seek(0.0)
+	print($Metronome1.get_playback_position())
 	for index in 8:
 		players[index].stop()
 

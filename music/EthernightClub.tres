@@ -1,10 +1,10 @@
 [gd_resource type="Resource" load_steps=3 format=2]
 
-[ext_resource path="res://music/Kevin MacLeod - Ethernight Club.wav" type="AudioStream" id=1]
-[ext_resource path="res://native/MusicClip.gdns" type="Script" id=2]
+[ext_resource path="res://native/ProvidedMusicClip.gdns" type="Script" id=1]
+[ext_resource path="res://music/Kevin MacLeod - Ethernight Club.wav" type="AudioStream" id=2]
 
 [resource]
-script = ExtResource( 2 )
-audio = ExtResource( 1 )
+script = ExtResource( 1 )
+audio_stream = ExtResource( 2 )
 samples_per_beat = 22615
 first_beat_sample = 688

@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://music/EthernightClub.tres" type="Resource" id=1]
 [ext_resource path="res://materials/dark_grey.tres" type="Material" id=2]
@@ -7,7 +7,6 @@
 [ext_resource path="res://scripts/widgets/slot/CassetteSlot.gd" type="Script" id=5]
 [ext_resource path="res://scenes/objects/cassette/Cassette.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/objects/sampler/Sampler.tscn" type="PackedScene" id=7]
-[ext_resource path="res://music/NineCircles.tres" type="Resource" id=8]
 
 [sub_resource type="CubeMesh" id=1]
 
@@ -379,8 +378,4 @@ environment = SubResource( 10 )
 
 [node name="Cassette" parent="." instance=ExtResource( 6 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.115587, 1.04813, -0.980066 )
-audio = ExtResource( 1 )
-
-[node name="Cassette2" parent="." instance=ExtResource( 6 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.298279, 1.04813, -0.980066 )
-audio = ExtResource( 8 )
+initial_audio = ExtResource( 1 )
