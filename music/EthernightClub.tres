@@ -6,5 +6,5 @@
 [resource]
 script = ExtResource( 1 )
 audio_stream = ExtResource( 2 )
-samples_per_beat = 22615
-first_beat_sample = 688
+samples_per_beat = 26460
+first_beat_sample = 0

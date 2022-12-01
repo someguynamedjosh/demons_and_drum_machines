@@ -1,0 +1,23 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Kevin MacLeod - Voxel Revolution.wav-6b3050f7ef8b340ed31b82d9767c8144.sample"
+
+[deps]
+
+source_file="res://music/Kevin MacLeod - Voxel Revolution.wav"
+dest_files=[ "res://.import/Kevin MacLeod - Voxel Revolution.wav-6b3050f7ef8b340ed31b82d9767c8144.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
